@@ -1,4 +1,3 @@
-import { IChessFen, IChessboardOrientation } from 'ui';
 import { CodeLanguageName } from './core';
 import { INodeLearningStatistics } from './learning';
 
@@ -13,11 +12,6 @@ export interface ICodeBodyMeta {
   language?: CodeLanguageName;
 }
 
-export interface IChessBodyMeta {
-  position: IChessFen;
-  orientation?: IChessboardOrientation;
-}
-
 export interface IChessBodyData {
   description: string;
 }
@@ -26,7 +20,7 @@ export interface NodeBody {
   id: number;
   node_id: number;
   type: NodeBodyType;
-  meta: ICodeBodyMeta | IChessBodyMeta;
+  meta: ICodeBodyMeta;
   data: {
     content?: string;
     code?: string;

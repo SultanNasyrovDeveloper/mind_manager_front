@@ -1,16 +1,19 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom';
-import LoginPage from 'app/auth/pages/LoginPage';
+import { default as authRoutes } from 'app/auth/routes';
+import { default as dashboardRoutes } from 'app/dashboard/routes';
+import { default as homeRoutes } from 'app/home/routes';
 import App from './App';
 
 const routes: RouteObject[] = [
+	
+	...authRoutes,
+	...homeRoutes,
 	{
 		element: <App />,
+		
 		path: '/',
 		children: [
-			{
-				path: '/auth/login',
-				element: <LoginPage />
-			}
+			...dashboardRoutes
 		]
 	}
 ];

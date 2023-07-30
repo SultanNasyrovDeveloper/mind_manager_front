@@ -1,1 +1,0 @@
-export { PalaceApiClient } from './palace';

@@ -2,7 +2,6 @@ import _ from 'lodash';
 import { EndpointObjectState } from 'store/types';
 import { CodeLanguageName } from 'types/core';
 import { PalaceNode, NodeBody, NodeAncestor } from 'types/node';
-import { DEFAULT_POSITION } from 'ui';
 
 export const getNodeAncestors = (
 	state: EndpointObjectState<PalaceNode>
@@ -30,7 +29,9 @@ export const getCodeLanguage = (
 
 export const getBodyChessPosition = (
 	state: EndpointObjectState<NodeBody>
-): string => _.get(state, 'detail.meta.position', DEFAULT_POSITION);
+): string | undefined => _.get(
+	state, 'detail.meta.position', undefined
+);
 
 export const getBodyChessOrientation = (
 	state: EndpointObjectState<NodeBody>

@@ -1,42 +1,42 @@
-export type IAccessToken = string;
-export type IRefreshToken = string;
+export type AccessToken = string;
+export type RefreshToken = string;
 
-export interface IPasswordChangeData {
+export interface PasswordChangeData {
   password: string;
   re_password: string;
 }
 
-export interface ISignupData extends IPasswordChangeData {
+export interface SignupData extends PasswordChangeData {
   email: string;
   username: string;
 }
 
-export interface IPasswordConfirmFormData {
+export interface PasswordConfirmFormData {
   new_password: string;
   re_new_password: string;
 }
 
-export interface IPasswordResetConfirmData
-  extends IPasswordConfirmFormData {
+export interface PasswordResetConfirmData
+  extends PasswordConfirmFormData {
   uid: string;
   token: string;
 }
 
-export interface ILoginCredentials {
+export interface LoginCredentials {
   email: string;
   password: string;
 }
 
 export interface AuthTokens {
-  access: IAccessToken;
-  refresh: IRefreshToken;
+  access: AccessToken;
+  refresh: RefreshToken;
 }
 
-export interface IRefreshTokenResponse {
-  access: IAccessToken;
+export interface RefreshTokenResponse {
+  access: AccessToken;
 }
 
-export interface IPasswordResetFormData {
+export interface PasswordResetFormData {
   email: string;
 }
 
@@ -44,4 +44,11 @@ export interface AuthCredentials {
   email: string;
   password: string;
   callbackUrl: string;
+}
+
+export interface AccessTokenParts {
+  exp: number;
+  jti: string;
+  token_type: 'access' | 'refresh';
+  user_id: number;
 }
