@@ -14,13 +14,11 @@ const BaseLayoutStyled = styled(BaseLayout)`
   width: 100vw;
   
   .app-header-container {
-    background-color: transparent;
-    border: antiquewhite;
+    background-color: lightgrey;
   }
   
-  .app-sidebar-container, .app-header-container {
+  .app-sidebar-container {
     background-color: transparent;
-    border: antiquewhite;
   }
 `;
 
@@ -33,7 +31,10 @@ export const AppLayout: FC<AppLayoutProps> = (
         { headerContent }
       </BaseLayout.Header>
       <BaseLayout>
-        <BaseLayout.Sider className="app-sidebar-container">
+        <BaseLayout.Sider
+          collapsed
+          className="app-sidebar-container"
+        >
           { sidebarContent }
         </BaseLayout.Sider>
         <BaseLayout.Content className="app-content-container">
@@ -44,3 +45,5 @@ export const AppLayout: FC<AppLayoutProps> = (
     </BaseLayoutStyled>
   );
 };
+
+export default AppLayout
