@@ -3,7 +3,7 @@ import PalacePage from './pages/PalacePage';
 
 const routes: RouteObject[] = [
 	{
-		path: '/palace/:id',
+		path: '/palace/:rootId',
 		element: <PalacePage />
 	}
 ];

@@ -1,14 +1,28 @@
-import * as React from "react";
-
-export * from 'antd';
-export * from './layout';
+export {
+	Button,
+	Col,
+	Drawer,
+	Dropdown,
+	Row,
+	Space,
+	Menu,
+	Spin,
+	Pagination,
+	notification
+} from 'antd';
+export type {
+	MenuProps,
+	SpaceProps,
+	DrawerProps,
+	DropdownProps,
+	PaginationProps
+} from 'antd';
 export type { ItemType } from 'antd/lib/menu/hooks/useItems';
+export * from './card';
+export * from './layout';
 export { default as Link } from './link';
 
 export interface MenuInfo {
 	key: string;
 	keyPath: string[];
-	/** @deprecated This will not support in future. You should avoid to use this */
-	item: React.ReactInstance;
-	domEvent: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>;
 }

@@ -21,7 +21,7 @@ export interface ILearningSession {
 }
 export type LearningSession = ILearningSession;
 
-export interface INodeLearningStatistics {
+export interface NodeLearningStatistics {
   id: number;
   status: string;
   interval: number;
@@ -31,7 +31,6 @@ export interface INodeLearningStatistics {
   easiness: string;
   average_rate: string;
 }
-export type NodeLearningStatistics = INodeLearningStatistics;
 
 export interface IStartLearningSessionData {
   targets: number[];

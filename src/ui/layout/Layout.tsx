@@ -20,6 +20,10 @@ const BaseLayoutStyled = styled(BaseLayout)`
   .app-sidebar-container {
     background-color: transparent;
   }
+  
+  .app-content-container {
+    padding: 8px 4px;
+  }
 `;
 
 export const AppLayout: FC<AppLayoutProps> = (
@@ -37,7 +41,9 @@ export const AppLayout: FC<AppLayoutProps> = (
         >
           { sidebarContent }
         </BaseLayout.Sider>
-        <BaseLayout.Content className="app-content-container">
+        <BaseLayout.Content
+          className="app-content-container"
+        >
           { mainContent }
         </BaseLayout.Content>
       </BaseLayout>

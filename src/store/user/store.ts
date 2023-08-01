@@ -9,6 +9,8 @@ import { createApiEndpointStore } from '../base';
 export interface UserStoreState extends EndpointObjectState<User> {
 	access?: string;
 	refresh?: string;
+	getAccessKey(): string;
+	getRefreshKey(): string;
 	currentUser: User;
 	login: (credentials: LoginCredentials) => Promise<AuthTokens | undefined>;
 	logout: () => void;
@@ -23,6 +25,29 @@ export const useUserStore = createApiEndpointStore<
 		'User',
 		client.users,
 		(apiClient, set, get) => ({
+			access: localStorage.getItem('access'),
+			refresh: localStorage.getItem('refresh'),
+			getAccessKey() {
+				const storeKey = get().access || undefined;
+				if (storeKey) return storeKey;
+				const localStorageKey = localStorage.getItem('access');
+				if (localStorageKey) {
+					set({ access: localStorageKey });
+					return localStorageKey;
+				}
+				return undefined;
+			},
+			getRefreshKey() {
+				const storeKey = get().refresh;
+				if (storeKey) return storeKey;
+				const localStorageKey = localStorage.getItem('refresh');
+				if (localStorageKey) {
+					set({ refresh: localStorageKey });
+					return localStorageKey;
+				}
+				return undefined;
+				
+			},
 			async signup() {},
 			async login(
 				credentials: LoginCredentials
@@ -37,6 +62,8 @@ export const useUserStore = createApiEndpointStore<
 					refresh: undefined,
 					currentUser: undefined
 				});
+				localStorage.removeItem('access');
+				localStorage.removeItem('refresh');
 			},
 			async fetchMe(): Promise<User | undefined> {
 				const [me, error] = await apiClient.fetchMe();

@@ -1,5 +1,5 @@
 import { CodeLanguageName } from './core';
-import { INodeLearningStatistics } from './learning';
+import { NodeLearningStatistics } from './learning';
 
 export type NodeBodyType = 'text' | 'code' | 'chess' | 'translation';
 
@@ -47,7 +47,7 @@ export interface PalaceNode {
   owner: number;
   
   ancestors: NodeAncestor[];
-  statistics: INodeLearningStatistics;
+  statistics: NodeLearningStatistics;
   body: NodeBody;
   children: PalaceNode[];
 }

@@ -17,6 +17,7 @@ export class AuthClient {
 	}
 	
 	async fetchTokens(credentials: LoginCredentials): Promise<MethodResponse<AuthTokens>> {
+		
 		return await this.client.post<AuthTokens>({
 			url: tokenObtainUrl,
 			data: credentials
@@ -27,7 +28,9 @@ export class AuthClient {
 		return await this.client.post<RefreshTokenResponse>(
 			{
 				url: tokenRefreshUrl,
-				data: { refresh: useUserStore.getState().refresh }}
+				data: { refresh: useUserStore.getState().refresh }
+			},
+			false
 		);
 	}
 	

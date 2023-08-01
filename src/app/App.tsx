@@ -27,9 +27,9 @@ const App: FC<AppProps> = ({...rest}) => {
     }
   ], [user]);
   
-  useEffect(() => {
-    if (location && !isAuthenticated) logout();
-  }, [location, isAuthenticated, logout]);
+  // useEffect(() => {
+  //   if (location && !isAuthenticated) logout();
+  // }, [location, isAuthenticated, logout]);
   
   return (
     <AppLayout

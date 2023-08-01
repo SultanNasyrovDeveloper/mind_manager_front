@@ -3,12 +3,11 @@ import {
   FormManager,
   FormManagerProps,
   Form,
-  FormItem,
-  Input
+  EmailField,
+  PasswordField
 } from 'lib/form';
 import { LoginCredentials } from 'types/auth';
 import { loginFormValidationSchema } from './validation';
-
 
 export interface LoginFormProps
   extends Omit<FormManagerProps<LoginCredentials>, 'initialValues'> {
@@ -24,19 +23,16 @@ const LoginForm: FC<LoginFormProps> = ({...rest}) => {
       {...rest}
     >
       <Form layout="vertical">
-        <FormItem name="email" label="Email">
-          <Input
-            name="email"
-            type="email"
-            placeholder="example@gmail.com"
-          />
-        </FormItem>
-        <FormItem name="password" label="Password">
-          <Input.Password
-            name="password"
-            placeholder="Enter your password..."
-          />
-        </FormItem>
+        <EmailField
+          name="email"
+          label="Email"
+          controlProps={{ placeholder: 'Enter email' }}
+        />
+        <PasswordField
+          name="password"
+          label="Password"
+          controlProps={{ placeholder: 'Enter your password...' }}
+        />
       </Form>
     </FormManager>
   );
