@@ -9,7 +9,6 @@ export interface UserMenuProps extends DropdownProps {}
 const UserMenu: FC<UserMenuProps> = (
   {...rest}
 ) => {
-  const currentUser = useUserStore(state => state.currentUser);
   const isAuthenticated = useUserStore(getIsCurrentUserAuthenticated);
   const logout = useLogout()
   const userMenuItems = useMemo<ItemType[]>(() => [

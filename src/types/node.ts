@@ -45,6 +45,9 @@ export interface PalaceNode {
   description: string;
   parent: number;
   owner: number;
+  level: number;
+  lft: number | null | undefined;
+  rght: number | null | undefined;
   
   ancestors: NodeAncestor[];
   statistics: NodeLearningStatistics;

@@ -6,7 +6,6 @@ export interface AppLayoutProps {
   headerContent: ReactNode;
   sidebarContent: ReactNode;
   mainContent: ReactNode;
-  footerContent: ReactNode;
 }
 
 const BaseLayoutStyled = styled(BaseLayout)`
@@ -27,7 +26,7 @@ const BaseLayoutStyled = styled(BaseLayout)`
 `;
 
 export const AppLayout: FC<AppLayoutProps> = (
-  { headerContent, sidebarContent, mainContent, footerContent }
+  { headerContent, sidebarContent, mainContent }
 ) => {
   return (
     <BaseLayoutStyled>
@@ -47,7 +46,6 @@ export const AppLayout: FC<AppLayoutProps> = (
           { mainContent }
         </BaseLayout.Content>
       </BaseLayout>
-      <BaseLayout.Footer>{ footerContent }</BaseLayout.Footer>
     </BaseLayoutStyled>
   );
 };

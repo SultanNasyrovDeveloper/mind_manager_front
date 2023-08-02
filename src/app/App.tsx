@@ -1,18 +1,14 @@
-import React, { FC, useMemo, useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import useLogout from 'app/auth/hooks/useLogout';
+import React, { FC, useMemo } from 'react';
+import { Outlet } from 'react-router-dom';
 import UserMenu from 'app/user/components/UserMenu';
-import { useUserStore, getIsCurrentUserAuthenticated } from 'store/user';
+import { useUserStore } from 'store/user';
 import { AppLayout, Row, SidebarMenu } from 'ui';
 import { AppstoreOutlined, ApartmentOutlined } from 'ui/icons';
 
 export interface AppProps { }
 
 const App: FC<AppProps> = ({...rest}) => {
-  const location = useLocation();
-  const logout = useLogout();
   const user = useUserStore(state => state.currentUser);
-  const isAuthenticated = useUserStore(getIsCurrentUserAuthenticated);
   
   const sidebarItems = useMemo(() => [
     {
@@ -27,10 +23,6 @@ const App: FC<AppProps> = ({...rest}) => {
     }
   ], [user]);
   
-  // useEffect(() => {
-  //   if (location && !isAuthenticated) logout();
-  // }, [location, isAuthenticated, logout]);
-  
   return (
     <AppLayout
       sidebarContent={
@@ -43,7 +35,6 @@ const App: FC<AppProps> = ({...rest}) => {
         </Row>
       }
       mainContent={<Outlet />}
-      footerContent="Footer"
     />
   );
 };

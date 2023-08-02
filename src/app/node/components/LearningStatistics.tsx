@@ -7,7 +7,7 @@ export interface LearningStatisticsProps {
 
 const LearningStatistics: FC<LearningStatisticsProps> = ({...rest}) => {
   return (
-    <div></div>
+    <div>Learning statistics</div>
   );
 };
 

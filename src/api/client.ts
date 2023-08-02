@@ -69,9 +69,11 @@ export class ApiClient {
 	}
 }
 
-export default new ApiClient({
+const appApiClient = new ApiClient({
 	baseUrl: API_HOST || 'http://localhost:8000/',
 	headers: {
 		'Content-Type': 'application/json'
 	}
-});
+})
+
+export default appApiClient;

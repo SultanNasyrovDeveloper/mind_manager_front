@@ -16,8 +16,9 @@ export class AuthClient {
 		this.client = client;
 	}
 	
-	async fetchTokens(credentials: LoginCredentials): Promise<MethodResponse<AuthTokens>> {
-		
+	async fetchTokens(
+		credentials: LoginCredentials
+	): Promise<MethodResponse<AuthTokens>> {
 		return await this.client.post<AuthTokens>({
 			url: tokenObtainUrl,
 			data: credentials
@@ -35,7 +36,7 @@ export class AuthClient {
 	}
 	
 	async getAuthHeaders(): Promise<Record<string, string>> {
-		const accessKey = useUserStore.getState().access;
+		const accessKey = useUserStore.getState().getAccessKey();
 		if (accessKey) {
 			if (isAccessTokenExpired(accessKey)) {
 				await this.refreshToken();

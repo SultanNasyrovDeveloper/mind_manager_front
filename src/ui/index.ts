@@ -8,6 +8,8 @@ export {
 	Menu,
 	Spin,
 	Pagination,
+	List,
+	Typography,
 	notification
 } from 'antd';
 export type {
@@ -15,6 +17,8 @@ export type {
 	SpaceProps,
 	DrawerProps,
 	DropdownProps,
+	ListProps,
+	TypographyProps,
 	PaginationProps
 } from 'antd';
 export type { ItemType } from 'antd/lib/menu/hooks/useItems';

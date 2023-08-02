@@ -3,5 +3,5 @@ import { UserStoreState } from './store';
 export const getIsCurrentUserAuthenticated = (
 	state: UserStoreState
 ): boolean => {
-	return !!state.currentUser && !!state.access;
+	return !!state.currentUser && !!state.getAccessKey();
 }

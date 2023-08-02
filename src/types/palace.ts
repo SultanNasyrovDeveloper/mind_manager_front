@@ -19,6 +19,9 @@ export interface TreeNode {
   id: number;
   parent: number | null;
   name: string;
+  level: number;
+  lft: number | null | undefined;
+  rght: number | null | undefined;
   statistics: NodeLearningStatistics;
   children: TreeNode[];
 }

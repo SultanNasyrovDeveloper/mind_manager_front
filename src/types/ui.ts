@@ -1,6 +1,6 @@
 
 export type Size = 'small' | 'middle' | 'large';
 
-export interface ISized {
+export interface Sized {
   size?: Size;
 }

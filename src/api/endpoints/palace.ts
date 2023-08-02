@@ -10,7 +10,7 @@ export class PalaceApiClient extends ApiEndpointClient<TreeNode> {
 		return await this.client.get<TreeNode>({ url: palaceTreeUrl(root) });
 	}
 	async statistics(palaceId: number): Promise<IPalaceStatistics | undefined> {
-		const [stats, error] = await this.client.get<IPalaceStatistics>(
+		const [stats, ] = await this.client.get<IPalaceStatistics>(
 			{ url: palaceStatisticsUrl(palaceId) }
 		);
 		return stats;
