@@ -14,6 +14,8 @@ const BaseLayoutStyled = styled(BaseLayout)`
   
   .app-header-container {
     background-color: lightgrey;
+    padding-right: 20px;
+    padding-left: 32px;
   }
   
   .app-sidebar-container {

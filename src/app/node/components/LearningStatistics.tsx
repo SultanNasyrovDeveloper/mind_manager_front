@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { NodeLearningStatistics } from 'types';
-import { Space, Typography, Size } from 'ui';
+import { Space, Text, Size, Tag, Divider } from 'ui';
 import {
   EyeOutlined,
   RetweetOutlined,
@@ -18,25 +18,29 @@ const LearningStatistics: FC<LearningStatisticsProps> = (
 ) => {
 
   return (
-    <Space size={size}>
-      <Typography.Text>{ statistics.status }</Typography.Text>
-      <Space>
+    <>
+      <Space size="small">
         <EyeOutlined />
-        <Typography.Text>{ statistics.views }</Typography.Text>
+        <Text>{ statistics.views }</Text>
       </Space>
-      <Space align="start">
+      <Divider type="vertical" />
+      <Space size="small">
         <RetweetOutlined />
-        <Typography.Text>{ statistics.repetitions }</Typography.Text>
+        <Text>{ statistics.repetitions }</Text>
       </Space>
-      <Space align="start">
+      <Divider type="vertical" />
+      <Space size="small">
         <StarOutlined />
-        <Typography.Text>{ statistics.average_rate }</Typography.Text>
+        <Text>{ statistics.average_rate }</Text>
       </Space>
-      <Space align="start">
+      <Divider type="vertical" />
+      <Space size="small">
         <FireOutlined />
-        <Typography.Text>{ statistics.easiness }</Typography.Text>
+        <Text>{ statistics.easiness }</Text>
       </Space>
-    </Space>
+      <Divider type="vertical" />
+      <Tag>{ statistics.status }</Tag>
+    </>
   );
 };
 

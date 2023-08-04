@@ -3,9 +3,9 @@ import { Input } from 'antd';
 import _ from 'lodash';
 import styled from 'styled-components';
 
-import Text, { ITextProps } from './Text';
+import Text, { TextProps } from './Text';
 
-export interface IEditableTextProps extends Omit<ITextProps, 'children'> {
+export interface IEditableTextProps extends Omit<TextProps, 'children'> {
   value: string;
   isEditing?: boolean;
   length?: number;

@@ -7,8 +7,8 @@ import { EndpointObjectState } from './types';
 
 export const createApiEndpointStore = <
 	ApiEndpointObject extends { id: number },
-	Client extends ApiEndpointClient<ApiEndpointObject> = ApiEndpointClient<ApiEndpointObject>,
-	State extends EndpointObjectState<ApiEndpointObject> = EndpointObjectState<ApiEndpointObject>,
+	Client = ApiEndpointClient<ApiEndpointObject>,
+	State = EndpointObjectState<ApiEndpointObject>,
 	>(
 	name = 'Unknown state',
 	apiClient: Client,

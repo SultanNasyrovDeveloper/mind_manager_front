@@ -40,7 +40,7 @@ export class AuthClient {
 		const accessKey = useUserStore.getState().getAccessKey();
 		if (accessKey) {
 			if (isAccessTokenExpired(accessKey)) {
-				await this.refreshToken();
+				await useUserStore.getState().refreshAccessToken();
 				const updatedAccessKey = useUserStore.getState().access;
 				if (updatedAccessKey && !isAccessTokenExpired(updatedAccessKey)) {
 					return { Authorization: `JWT ${updatedAccessKey}` };

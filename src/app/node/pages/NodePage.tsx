@@ -18,6 +18,7 @@ const NodePage: FC<NodePageProps> = (
   
   useAsync(async () => {
     const queryParamsId = Number(nodeId);
+    debugger;
     if (queryParamsId && queryParamsId !== currentNodeId) {
       const node = await fetchNode(queryParamsId);
       if (node) await fetchNodeBody(node.body)

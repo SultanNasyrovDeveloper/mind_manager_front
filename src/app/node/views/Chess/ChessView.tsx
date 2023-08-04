@@ -1,5 +1,4 @@
 import React, { FC, useState, useMemo, useEffect } from 'react';
-import _ from 'lodash';
 import TwoColumnLayout from 'lib/components/TwoColumnLayout';
 import {
 	useNodeStore,
@@ -19,7 +18,7 @@ import {
 } from 'ui';
 import { grey } from 'ui/colors';
 import GeneralInfoCard from '../../components/GeneralInfoCard';
-import BodyActions from '../../components/Actions';
+import BodyActions from '../../components/BodyActions';
 import { NodeViewProps } from '../../types';
 import ChessboardToolbar from './Toolbar';
 
@@ -30,8 +29,6 @@ const ChessView: FC<NodeViewProps> = ({ onNodeSubtree }) => {
 	const [boardOrientation, setBoardOrientation] =
 		useState<IChessboardOrientation>('white');
 	const node = useNodeStore(state => state.detail);
-	const isNodeLoading = useNodeStore(state => state.isDetailLoading);
-	const isBodyLoading = useNodeBodyStore(state => state.isDetailLoading);
 	const body = useNodeBodyStore(state => state.detail);
 	const bodyPosition = useNodeBodyStore(getBodyChessPosition);
 	const bodyOrientation = useNodeBodyStore(getBodyChessOrientation);
@@ -42,10 +39,11 @@ const ChessView: FC<NodeViewProps> = ({ onNodeSubtree }) => {
 		() => bodyPosition !== currentPosition,
 		[bodyPosition, currentPosition]
 	);
+	
 	useEffect(() => {
 		setCurrentPosition(bodyPosition);
 		// @ts-ignore
-		setBoardOrientation(bodyOrientation);
+		setBoardOrientation(bodyOrientation || 'white');
 	}, [bodyPosition, setCurrentPosition, setBoardOrientation, bodyOrientation]);
 	
 	return (
@@ -58,14 +56,7 @@ const ChessView: FC<NodeViewProps> = ({ onNodeSubtree }) => {
 						<>
 							{body &&
 								<BodyActions
-									isLoading={isNodeLoading || isBodyLoading}
 									hasChanged={hasChanged}
-									body={body}
-									onTypeChange={(newValue) => updateBody(body.id,{ type: newValue})}
-									onLanguageChange={(newLanguage) => updateBody(
-										body.id,
-										{ meta: { language: newLanguage }}
-									)}
 									onSave={() => updateBody(
 										body.id,
 										{ meta: { position: currentPosition }}

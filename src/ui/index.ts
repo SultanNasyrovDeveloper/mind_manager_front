@@ -1,5 +1,6 @@
 
 export {
+	Breadcrumb,
 	Col,
 	Collapse,
 	Drawer,
@@ -12,6 +13,7 @@ export {
 	Pagination,
 	List,
 	Layout,
+	Tag,
 	Tooltip,
 	notification
 } from 'antd';

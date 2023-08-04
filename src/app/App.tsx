@@ -25,6 +25,7 @@ const App: FC<AppProps> = ({...rest}) => {
   ], [user]);
   
   useAsyncOnce(async () => {
+    console.log('loading user')
     if (!user) await fetchMe();
   });
   

@@ -1,11 +1,11 @@
 import React, { FC, ReactNode, CSSProperties } from 'react';
 import { Typography } from 'antd';
 import styled from 'styled-components';
-
+import { SizedComponent } from '../types';
 import { TextLevel } from './types';
 import { getDefaultTextColor } from './utils';
 
-export interface ITextProps {
+export interface TextProps extends SizedComponent {
   color?: string;
   children?: ReactNode;
   level?: TextLevel;
@@ -18,7 +18,13 @@ export const textLevelToPixels: Record<TextLevel, number> = {
   1: 18, 2: 16, 3: 14, 4: 12, 5: 10
 };
 
-const Text: FC<ITextProps> = ({ isHeader, children, ...rest }) => {
+export const sizeToPixel: Record<string, number> = {
+  small: textLevelToPixels[5],
+  middle: textLevelToPixels[3],
+  large: textLevelToPixels[1],
+}
+
+const Text: FC<TextProps> = ({ isHeader, children, ...rest }) => {
   return (
     <>
       {isHeader &&
@@ -37,7 +43,7 @@ const Text: FC<ITextProps> = ({ isHeader, children, ...rest }) => {
 
 const StyledText = styled(Text)`
   color: ${props => props.color || getDefaultTextColor(props.level || 3)}!important;
-  font-size: ${props => textLevelToPixels[props.level || 3]}px;
+  font-size: ${props => props.size ? sizeToPixel[props.size] : textLevelToPixels[props.level || 3]}px;
   cursor: ${props => props.isPointable ? 'pointer' : 'Text'};
 `;
 

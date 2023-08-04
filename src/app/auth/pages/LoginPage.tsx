@@ -13,14 +13,14 @@ const LoginPage: FC<LoginPageProps> = ({...rest}) => {
   const navigate = useNavigate();
   const loginFormRef = useRef<FormProps<LoginCredentials>>(null);
   const isAuthenticated = useUserStore(getIsCurrentUserAuthenticated);
-  const login = useUserStore(state => state.login);
+  const fetchAuthTokens = useUserStore(state => state.fetchAuthTokens);
   const fetchMe = useUserStore(state => state.fetchMe);
   
   const handleLogin = useCallback(
     async (credentials: LoginCredentials) => {
-      await login(credentials);
+      await fetchAuthTokens(credentials);
       await fetchMe();
-  }, [login, fetchMe]);
+  }, [fetchAuthTokens, fetchMe]);
   
   useEffect(() => {
     if (isAuthenticated) navigate('/dashboard');

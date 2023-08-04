@@ -4,15 +4,21 @@ import {
 } from '@ant-design/colors';
 
 export type Color = string;
-export type ColorArray = Color[];
 export type Shade = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export enum ShadeEnum {
+  primary = 5,
+  lightest = 0,
+  light = 3,
+  medium = 5,
+  dark = 7,
+  darkest = 9
+}
 
 class UIColor {
+  name: string;
+  shades: Color[];
 
-  name: Color;
-  shades: ColorArray;
-
-  constructor(name: Color, shades: ColorArray) {
+  constructor(name: Color, shades: Color[]) {
     this.name = name;
     this.shades = shades;
   }
@@ -53,6 +59,7 @@ export const grey = new UIColor(
     '#bfbfbf', '#8c8c8c', '#595959', '#434343', '#262626',
   ]
 );
-
 export const blue = new UIColor('blue', geekblue);
 export const orange = new UIColor('orange', antdOrange);
+export const primary = blue;
+export const secondary = orange;

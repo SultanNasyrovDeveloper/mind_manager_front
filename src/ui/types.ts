@@ -3,6 +3,8 @@ import type { ItemType, MenuItemType } from 'antd/lib/menu/hooks/useItems';
 import type { SizeType as Size } from 'antd/lib/config-provider/SizeContext';
 
 export type {
+	BreadcrumbProps,
+	BreadcrumbItemProps,
 	CollapseProps,
 	DividerProps,
 	MenuProps,
@@ -11,6 +13,7 @@ export type {
 	DropdownProps,
 	ListProps,
 	LayoutProps,
+	TagProps,
 	TooltipProps,
 	PaginationProps,
 } from 'antd';

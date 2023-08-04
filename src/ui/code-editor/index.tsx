@@ -1,22 +1,14 @@
 import React, { FC } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
+import CodeMirror, { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 
-export interface ICodeEditorProps {
-  content: string;
-  onChange: (value: string) => void;
-  height?: string;
-  extensions?: any[];
-}
+export interface CodeEditorProps extends ReactCodeMirrorProps {}
 
-export const CodeEditor: FC<ICodeEditorProps> = (props) => {
-  const { content, height, extensions, onChange } = props;
+export const CodeEditor: FC<CodeEditorProps> = (props) => {
 
   return (
     <CodeMirror
-      value={content}
-      height={height || '100%'}
-      onChange={(value, viewUpdate) => onChange(value)}
-      extensions={extensions || []}
+      placeholder="Enter some code..."
+      {...props}
     />
   );
 };

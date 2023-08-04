@@ -8,17 +8,16 @@ import {
 	getCodeLanguage,
 	getCodeEditorContent
 } from 'store/node';
-import { NodeBody, PalaceNode } from 'types';
+import { PalaceNode } from 'types';
 import { Card, CodeEditor } from 'ui';
 import GeneralInfoCard from '../../components/GeneralInfoCard';
-import BodyActions from '../../components/Actions';
+import BodyActions from '../../components/BodyActions';
 import { NodeViewProps } from '../../types';
 
 const CodeView: FC<NodeViewProps> = ({ onNodeSubtree}) => {
 	const [editorContent, setEditorContent] = useState('');
 	const node = useNodeStore(state => state.detail);
 	const body = useNodeBodyStore(state => state.detail);
-	const isBodyLoading = useNodeBodyStore(state => state.isDetailLoading);
 	const language = useNodeBodyStore(getCodeLanguage);
 	const bodyEditorContent = useNodeBodyStore(getCodeEditorContent);
 	const updateBody = useNodeBodyStore(state => state.update);
@@ -50,14 +49,7 @@ const CodeView: FC<NodeViewProps> = ({ onNodeSubtree}) => {
 								<>
 									{body &&
 										<BodyActions
-	                    isLoading={isBodyLoading}
-	                    body={body as NodeBody}
 	                    hasChanged={hasChanged}
-	                    onTypeChange={(newValue) => updateBody(body.id, { type: newValue})}
-	                    onLanguageChange={(newLanguage) => updateBody(
-												body.id,
-		                    { meta: { language: newLanguage }}
-	                    )}
 	                    onSave={() => updateBody(
 												body.id,
 		                    { data: { content: editorContent }}
@@ -71,7 +63,8 @@ const CodeView: FC<NodeViewProps> = ({ onNodeSubtree}) => {
 								content={editorContent}
 								height="75vh"
 								onChange={setEditorContent}
-								extensions={extensions}
+								// @ts-ignore
+								extensions={extensions || []}
 							/>
 						</Card>
 					}
