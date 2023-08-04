@@ -14,11 +14,10 @@ const TreeRoot: FC<TreeRootProps> = (
   return (
     <Card
       title={<Typography>{ node.name }</Typography>}
-      subtitle={
-        <LearningStatistics statistics={node.statistics} />
-      }
       extra={<RootActions node={node} />}
-    />
+    >
+      <LearningStatistics statistics={node.statistics} />
+    </Card>
   );
 };
 

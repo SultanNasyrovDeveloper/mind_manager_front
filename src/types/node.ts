@@ -1,5 +1,5 @@
-import { CodeLanguageName } from './core';
-import { NodeLearningStatistics } from './learning';
+import { Identifier } from './core';
+import { CodeLanguageName } from 'ui/types';
 
 export type NodeBodyType = 'text' | 'code' | 'chess' | 'translation';
 
@@ -8,11 +8,9 @@ export interface NodeAncestor {
   name: string;
 }
 
-export interface ICodeBodyMeta {
-  language?: CodeLanguageName;
-}
+export type CodeBodyMeta = Record<string, any>;
 
-export interface IChessBodyData {
+export interface ChessBodyData {
   description: string;
 }
 
@@ -20,7 +18,7 @@ export interface NodeBody {
   id: number;
   node_id: number;
   type: NodeBodyType;
-  meta: ICodeBodyMeta;
+  meta: CodeBodyMeta;
   data: {
     content?: string;
     code?: string;
@@ -28,7 +26,7 @@ export interface NodeBody {
   };
 }
 
-export interface INodeCreateFormData {
+export interface NodeCreateFormData {
   name?: string;
   parent: number;
   body?: {
@@ -40,19 +38,19 @@ export interface INodeCreateFormData {
 }
 
 export interface PalaceNode {
-  id: number;
+  id: Identifier;
   name: string;
   description: string;
-  parent: number;
-  owner: number;
+  parent: Identifier;
+  owner: Identifier;
   level: number;
-  lft: number | null | undefined;
-  rght: number | null | undefined;
+  lft: Identifier | null | undefined;
+  rght: Identifier | null | undefined;
   
   ancestors: NodeAncestor[];
-  statistics: NodeLearningStatistics;
-  body: NodeBody;
-  children: PalaceNode[];
+  statistics: Identifier;
+  body: Identifier;
+  children: Identifier[];
 }
 
 

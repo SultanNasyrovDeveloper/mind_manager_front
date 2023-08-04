@@ -9,8 +9,8 @@ import { createApiEndpointStore } from '../base';
 export interface UserStoreState extends EndpointObjectState<User> {
 	access?: string;
 	refresh?: string;
-	getAccessKey(): string;
-	getRefreshKey(): string;
+	getAccessKey(): string | undefined;
+	getRefreshKey(): string | undefined;
 	currentUser: User;
 	login: (credentials: LoginCredentials) => Promise<AuthTokens | undefined>;
 	logout: () => void;
@@ -25,8 +25,9 @@ export const useUserStore = createApiEndpointStore<
 		'User',
 		client.users,
 		(apiClient, set, get) => ({
-			access: localStorage.getItem('access'),
-			refresh: localStorage.getItem('refresh'),
+			currentUser: undefined,
+			access: localStorage.getItem('access') || undefined,
+			refresh: localStorage.getItem('refresh') || undefined,
 			getAccessKey() {
 				const storeKey = get().access || undefined;
 				if (storeKey) return storeKey;

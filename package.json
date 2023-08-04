@@ -63,6 +63,7 @@
     "@types/node": "^16.18.39",
     "@types/react": "^18.2.17",
     "@types/react-dom": "^18.2.7",
-    "jest": "^27.5.1"
+    "jest": "^27.5.1",
+    "simple-zustand-devtools": "^1.1.0"
   }
 }

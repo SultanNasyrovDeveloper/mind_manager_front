@@ -18,13 +18,13 @@ const RootActions: FC<RootActionsProps> = (
 ) => {
   return (
 	  <Space>
-		  <Link to={`/palace/${node.lft}`}>
-			  <Button
-				  type="text"
-				  icon={<CaretLeftOutlined />}
-				  disabled={!node.lft}
-			  />
-		  </Link>
+		  {/*<Link to={`/palace/${node.lft}`}>*/}
+			{/*  <Button*/}
+			{/*	  type="text"*/}
+			{/*	  icon={<CaretLeftOutlined />}*/}
+			{/*	  disabled={!node.lft}*/}
+			{/*  />*/}
+		  {/*</Link>*/}
 		  <Link to={`/palace/${node.parent}`}>
 			  <Button
 				  type="text"
@@ -32,13 +32,13 @@ const RootActions: FC<RootActionsProps> = (
 				  disabled={!node.parent}
 			  />
 		  </Link>
-		  <Link to={`/palace/${node.rght}`}>
-			  <Button
-				  type="text"
-				  icon={<CaretRightOutlined />}
-				  disabled={!node.rght}
-			  />
-		  </Link>
+		  {/*<Link to={`/palace/${node.rght}`}>*/}
+			{/*  <Button*/}
+			{/*	  type="text"*/}
+			{/*	  icon={<CaretRightOutlined />}*/}
+			{/*	  disabled={!node.rght}*/}
+			{/*  />*/}
+		  {/*</Link>*/}
 		  <Space size="small">
 			  <Link to={`/palace/node/${node.id}`}>
 				  <Button

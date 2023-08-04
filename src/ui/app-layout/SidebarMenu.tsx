@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Menu, MenuProps, ItemType, MenuInfo } from 'ui';
+import { Menu, MenuProps, MenuInfo } from 'ui';
 
 export interface SidebarMenuItem {
   key: string;

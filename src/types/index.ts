@@ -7,4 +7,3 @@ export * from './layout';
 export * from './palace';
 export * from './learning';
 export * from './node';
-export * from './ui';

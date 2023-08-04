@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import { EndpointObjectState } from 'store/types';
-import { CodeLanguageName } from 'types/core';
+import { CodeLanguageName } from 'ui/types';
 import { PalaceNode, NodeBody, NodeAncestor } from 'types/node';
+import { DEFAULT_POSITION } from 'ui/chessboard';
 
 export const getNodeAncestors = (
 	state: EndpointObjectState<PalaceNode>
@@ -29,8 +30,8 @@ export const getCodeLanguage = (
 
 export const getBodyChessPosition = (
 	state: EndpointObjectState<NodeBody>
-): string | undefined => _.get(
-	state, 'detail.meta.position', undefined
+): string => _.get(
+	state, 'detail.meta.position', DEFAULT_POSITION
 );
 
 export const getBodyChessOrientation = (

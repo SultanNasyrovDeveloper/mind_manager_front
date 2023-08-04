@@ -1,5 +1,6 @@
 export type AccessToken = string;
 export type RefreshToken = string;
+export type AuthHeaders = Record<string, string>;
 
 export interface PasswordChangeData {
   password: string;

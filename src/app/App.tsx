@@ -1,6 +1,7 @@
 import React, { FC, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 import UserMenu from 'app/user/components/UserMenu';
+import useAsyncOnce from 'lib/hooks/useAsyncOnce';
 import { useUserStore } from 'store/user';
 import { AppLayout, Row, SidebarMenu } from 'ui';
 import { AppstoreOutlined, ApartmentOutlined } from 'ui/icons';
@@ -9,7 +10,7 @@ export interface AppProps { }
 
 const App: FC<AppProps> = ({...rest}) => {
   const user = useUserStore(state => state.currentUser);
-  
+  const fetchMe = useUserStore(state => state.fetchMe);
   const sidebarItems = useMemo(() => [
     {
       key: 'dashboard',
@@ -22,6 +23,10 @@ const App: FC<AppProps> = ({...rest}) => {
       to: `/palace/${user ? user.mind_palace : ''}`
     }
   ], [user]);
+  
+  useAsyncOnce(async () => {
+    if (!user) await fetchMe();
+  });
   
   return (
     <AppLayout

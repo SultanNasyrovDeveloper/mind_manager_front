@@ -1,4 +1,4 @@
-import { IPaginatedResult, IQueryParams, Url, Identifier } from 'types';
+import { PaginatedResult, QueryParams, Url, Identifier } from 'types';
 import { ApiClient } from '../client';
 import { RequestConfig, MethodResponse } from '../types';
 import { makeDetailUrl } from '../utils';
@@ -23,14 +23,14 @@ export class ApiEndpointClient<EndpointObjectType> {
 		return await this.client.handle<EndpointObjectType>(requestData);
 	}
 	async list(
-		query: IQueryParams
-	): Promise<MethodResponse<IPaginatedResult<EndpointObjectType>>> {
+		query: QueryParams
+	): Promise<MethodResponse<PaginatedResult<EndpointObjectType>>> {
 		const requestConfig: RequestConfig = {
 			method: 'get',
 			url: this.baseUrl,
 			params: query
 		};
-		return await this.client.handle<IPaginatedResult<EndpointObjectType>>(
+		return await this.client.handle<PaginatedResult<EndpointObjectType>>(
 			requestConfig
 		);
 	}

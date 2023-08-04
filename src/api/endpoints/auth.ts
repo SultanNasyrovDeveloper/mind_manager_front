@@ -1,7 +1,8 @@
 import { MethodResponse } from 'api/types';
 import {
-	LoginCredentials,
+	AuthHeaders,
 	AuthTokens,
+	LoginCredentials,
 	RefreshTokenResponse
 } from 'types/auth';
 import { useUserStore } from 'store/user';
@@ -35,7 +36,7 @@ export class AuthClient {
 		);
 	}
 	
-	async getAuthHeaders(): Promise<Record<string, string>> {
+	async getAuthHeaders(): Promise<AuthHeaders> {
 		const accessKey = useUserStore.getState().getAccessKey();
 		if (accessKey) {
 			if (isAccessTokenExpired(accessKey)) {

@@ -1,19 +1,17 @@
 import { NodeLearningStatistics } from './learning'
 
-export type IPalaceStatisticsField =
+export type PalaceStatisticsField =
   'count'
   | 'views'
   | 'repetitions'
   | 'average_rating'
   | 'size';
 
-export interface IMindaPalace {
+export interface MindaPalace {
   id: number;
   root: number;
   user: number;
 }
-
-export type MindPalace = IMindaPalace;
 
 export interface TreeNode {
   id: number;
@@ -26,8 +24,8 @@ export interface TreeNode {
   children: TreeNode[];
 }
 
-export interface IPalaceStatistics
-  extends Record<IPalaceStatisticsField, number> {
+export interface PalaceStatistics
+  extends Record<PalaceStatisticsField, number> {
   root: number;
 }
 

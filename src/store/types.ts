@@ -1,4 +1,4 @@
-import { QueryParams, IPaginatedResult } from 'types/api';
+import { QueryParams, PaginatedResult } from 'types/api';
 import { Identifier } from 'types/core';
 
 export interface EndpointObjectState<ApiEndpointObject = { id: number }> {

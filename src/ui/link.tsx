@@ -6,10 +6,8 @@ import {
 
 export interface LinkProps extends BaseLinkProps {}
 
-const Link: FC<LinkProps> = ({...rest}) => {
+export const Link: FC<LinkProps> = ({...rest}) => {
   return (
     <BaseLink {...rest} />
   );
 };
-
-export default Link;
