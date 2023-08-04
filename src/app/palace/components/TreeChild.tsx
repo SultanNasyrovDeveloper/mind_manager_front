@@ -16,7 +16,7 @@ const TreeChild: FC<TreeChildProps> = (
     <Card
       title={
         <Link to={`/palace/${node.id}`}>
-          <Text level={2}>{ node.name }</Text>
+          <Text isPointable level={2}>{ node.name }</Text>
         </Link>
       }
       subtitle={

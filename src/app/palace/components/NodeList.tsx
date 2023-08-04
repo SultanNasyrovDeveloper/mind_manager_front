@@ -34,7 +34,7 @@ const NodeList: FC<NodeListProps> = (
 					}
 		    >
 			    <Link to={`/palace/${node.id}`}>
-				    <Text level={4}>
+				    <Text isPointable level={4}>
 					    { node.name }
 						</Text>
 					</Link>

@@ -1,7 +1,9 @@
 import React, { FC } from 'react';
-import { TreeNode } from 'types/palace';
+
 import LearningStatistics from 'app/node/components/LearningStatistics';
-import { Card, Space, Typography, Text } from 'ui';
+import BackButton from 'lib/components/BackButton';
+import { TreeNode } from 'types/palace';
+import { Card, Space, Text } from 'ui';
 import RootActions from './NodeActions';
 
 export interface TreeRootProps {
@@ -13,7 +15,12 @@ const TreeRoot: FC<TreeRootProps> = (
 ) => {
   return (
     <Card
-      title={<Text level={1}>{ node.name }</Text>}
+      title={
+        <Space>
+          <BackButton />
+          <Text isPointable level={1}>{ node.name }</Text>
+        </Space>
+      }
       extra={
         <Space>
           <LearningStatistics statistics={node.statistics} />

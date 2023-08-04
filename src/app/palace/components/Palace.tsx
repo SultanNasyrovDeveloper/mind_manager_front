@@ -24,7 +24,7 @@ const Palace: FC<PalaceProps> = ({...rest}) => {
           </Col>
           <Col
 		          span={24}
-		          style={{ height: '75vh', overflowY: 'auto' }}
+		          style={{ height: '85vh', overflowY: 'auto' }}
           >
             <Row>
 							{ subtreeChildren.map(childNode => (
