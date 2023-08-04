@@ -4,7 +4,11 @@ import { API_HOST } from 'config';
 import { AuthClient } from './endpoints/auth';
 import { PalaceApiClient } from './endpoints/palace';
 import { LearningSessionApiEndpoint } from './endpoints/learningSession';
-import { NodeApiEndpoint, NodeBodyApiEndpoint } from './endpoints/node';
+import {
+	NodeApiEndpoint,
+	NodeBodyApiEndpoint,
+	NodeMediaApiEndpoint
+} from './endpoints/node';
 import { UserApiClient } from './endpoints/user';
 import { MethodResponse, RequestConfig } from './types';
 
@@ -22,6 +26,7 @@ export class ApiClient {
 	readonly bodies: NodeBodyApiEndpoint;
 	readonly learningSessions: LearningSessionApiEndpoint;
 	readonly users: UserApiClient;
+	readonly media: NodeMediaApiEndpoint;
 	
 	constructor({ baseUrl, ...rest }: ApiClientConfig) {
 		this.baseUrl = baseUrl;
@@ -30,6 +35,7 @@ export class ApiClient {
 		this.palaces = new PalaceApiClient('palace/palaces/', this);
 		this.nodes = new NodeApiEndpoint('node/nodes/', this);
 		this.bodies = new NodeBodyApiEndpoint('node/bodies/', this);
+		this.media = new NodeMediaApiEndpoint('node/media/', this);
 		this.learningSessions = new LearningSessionApiEndpoint(
 			'learning/sessions/',
 			this
@@ -41,7 +47,6 @@ export class ApiClient {
 		config: RequestConfig,
 		withAuth: boolean = true
 	): Promise<MethodResponse<ResponseData>> {
-		/** Handle request */
 		let responseData;
 		let error;
 		if (withAuth) config.headers = await this.auth.getAuthHeaders();

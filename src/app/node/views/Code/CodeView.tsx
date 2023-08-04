@@ -44,6 +44,7 @@ const CodeView: FC<NodeViewProps> = ({ onNodeSubtree}) => {
 				<TwoColumnLayout
           first={
 						<Card
+							title="Code Editor"
 							bodyStyle={{ padding: '0 default' }}
 							extra={
 								<>

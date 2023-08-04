@@ -43,7 +43,6 @@ const Actions: FC<NodeBodyActionsProps> = (
           <Button
             type="primary"
             icon={<SaveOutlined />}
-            size={size}
             disabled={!hasChanged}
             loading={isBodyUpdating}
             onClick={() => onSave && onSave()}

@@ -26,6 +26,15 @@ export interface NodeBody {
   };
 }
 
+export interface NodeMedia {
+  id: Identifier;
+  title: string;
+  description: string;
+  type: string;
+  node: Identifier;
+  config: Record<string, unknown>
+}
+
 export interface NodeCreateFormData {
   name?: string;
   parent: number;

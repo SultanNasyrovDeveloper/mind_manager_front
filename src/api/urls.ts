@@ -22,6 +22,8 @@ export const nodeDetailUrl = (nodeId: string | number) => {
 export const nodeBodyDetailUrl = (bodyId: number | string) => {
   return `node/bodies/${bodyId}/`;
 };
+
+export const nodeMediaUrl = 'node/media/'
 export const learningSessionsUrl = 'learning/sessions/';
 export const myActiveSessionUrl = 'learning/sessions/active_session/';
 export const learningSessionDetailUrl = (sessionId: number | string) => {

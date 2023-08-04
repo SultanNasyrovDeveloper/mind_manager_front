@@ -18,7 +18,7 @@ const TreeRoot: FC<TreeRootProps> = (
       title={
         <Space>
           <BackButton />
-          <Text isPointable level={1}>{ node.name }</Text>
+          <Text isPointable level={2}>{ node.name }</Text>
         </Space>
       }
       extra={

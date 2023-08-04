@@ -1,3 +1,4 @@
+
 export type AccessToken = string;
 export type RefreshToken = string;
 export type AuthHeaders = Record<string, string>;
@@ -39,12 +40,6 @@ export interface RefreshTokenResponse {
 
 export interface PasswordResetFormData {
   email: string;
-}
-
-export interface AuthCredentials {
-  email: string;
-  password: string;
-  callbackUrl: string;
 }
 
 export interface AccessTokenParts {
