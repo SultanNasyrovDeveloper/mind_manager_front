@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { EndpointObjectState } from 'store/types';
 import { CodeLanguageName } from 'ui/types';
-import { PalaceNode, NodeBody, NodeAncestor } from 'types/node';
+import {PalaceNode, NodeBody, NodeAncestor, NodeMedia} from 'types/node';
 import { DEFAULT_POSITION } from 'ui/chessboard';
 
 export const getNodeAncestors = (
@@ -37,3 +37,13 @@ export const getBodyChessPosition = (
 export const getBodyChessOrientation = (
 	state: EndpointObjectState<NodeBody>
 ): string => _.get(state, 'detail.meta.orientation', 'white');
+
+export const getFetchNodeMedia = (
+	state: EndpointObjectState<NodeMedia>
+): (nodeId: number) => Promise<NodeMedia[] | undefined> => {
+	return async (nodeId: number) => {
+		const queryParams = { node: nodeId };
+		const [results] =  await state.fetchList(queryParams);
+		return results;
+	};
+}

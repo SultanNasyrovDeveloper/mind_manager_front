@@ -82,6 +82,6 @@ const appApiClient = new ApiClient({
 	headers: {
 		'Content-Type': 'application/json'
 	}
-})
+});
 
 export default appApiClient;

@@ -2,15 +2,21 @@ import { useState, useMemo } from 'react';
 import { QueryParams } from 'types/api';
 import { PaginationProps } from 'ui';
 
-const usePagination = (): [PaginationProps, QueryParams, (count: number) => void] => {
+export type UsePaginationReturnType = [
+	paginationConfig: PaginationProps,
+	paginationQueryParams: QueryParams,
+	setCount: (count: number) => void
+];
+
+const usePagination = (): UsePaginationReturnType => {
 	const [page, setPage] = useState(1);
 	const [pageSize, setPageSize] = useState(10);
 	const [count, setCount] = useState(0);
 	
-	return useMemo<[PaginationProps, QueryParams, (count: number) => void]>(() => [
+	return useMemo<UsePaginationReturnType>(() => [
 		{
 			current: page,
-			total: count || 0,
+			total: count,
 			pageSize,
 			onChange: (page: number, pageSize: number) => {
 				setPage(page);

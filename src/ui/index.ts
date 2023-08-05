@@ -17,14 +17,14 @@ export {
 	Tooltip,
 	notification
 } from 'antd';
-
 export * from './app-layout';
 export * from './button';
 export * from './card';
+export * from './chessboard';
+export * from './code-editor';
 export * from './link';
 export * from './text-editor';
-export * from './code-editor';
-export * from './chessboard';
 export * from './types';
 export * from './typography';
+export * from './youtube';
 

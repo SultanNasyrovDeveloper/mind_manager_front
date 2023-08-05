@@ -1,5 +1,6 @@
 import React, { FC, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Preloader from 'lib/components/Preloader';
 import useAsync from 'lib/hooks/useAsync';
 import { useNodeStore, useNodeBodyStore } from 'store/node';
 import { NodeBodyType } from 'types';
@@ -17,16 +18,18 @@ const bodyTypeToViewMap: Record<NodeBodyType, FC<NodeViewProps>> = {
 	chess: ChessView,
 	text: TextView,
 	code: CodeView,
-	translation: TranslationView
+	translation: TranslationView  
 }
 
 const View: FC = () => {
 	const pageQuery = useParams();
 	const navigate = useNavigate();
 	const nodeBodyId = useNodeStore(state => state.detail?.body);
-	const bodyId = useNodeBodyStore(state => state.id);
+	const bodyId = useNodeBodyStore(state => state.detail?.id);
+	const isBodyLoading = useNodeBodyStore(state => state.isDetailLoading);
 	const nodeBodyType = useNodeBodyStore(state => state.detail?.type);
 	const fetchBody = useNodeBodyStore(state => state.fetchDetail);
+	
 	const ViewComponent = useMemo(() => {
 		if (nodeBodyType) return bodyTypeToViewMap[nodeBodyType as NodeBodyType];
 		return DefaultView;
@@ -37,10 +40,15 @@ const View: FC = () => {
 	}, [nodeBodyId, bodyId]);
 	
 	return (
-		<ViewComponent
-			onNodeDetail={() => navigate(`palace/node/${pageQuery.nodeId}`)}
-			onNodeSubtree={() => navigate(`/palace/${pageQuery.nodeId}`)}
-		/>
+		<>
+			{isBodyLoading && <Preloader />}
+			{(!isBodyLoading && bodyId) &&
+        <ViewComponent
+		      onNodeDetail={() => navigate(`palace/node/${pageQuery.nodeId}`)}
+		      onNodeSubtree={() => navigate(`/palace/${pageQuery.nodeId}`)}
+        />
+			}
+		</>
 	);
 };
 

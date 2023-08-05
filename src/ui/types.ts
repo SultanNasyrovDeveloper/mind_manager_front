@@ -7,15 +7,17 @@ export type {
 	BreadcrumbItemProps,
 	CollapseProps,
 	DividerProps,
-	MenuProps,
-	SpaceProps,
 	DrawerProps,
 	DropdownProps,
+	InputProps,
 	ListProps,
 	LayoutProps,
+	MenuProps,
+	PaginationProps,
+	SelectProps,
+	SpaceProps,
 	TagProps,
 	TooltipProps,
-	PaginationProps,
 } from 'antd';
 export type {
 	LanguageName as CodeLanguageName

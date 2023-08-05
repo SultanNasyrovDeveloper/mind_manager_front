@@ -19,12 +19,14 @@ const TreeChild: FC<TreeChildProps> = (
           <Text isPointable level={3}>{ node.name }</Text>
         </Link>
       }
-      subtitle={
-        <LearningStatistics size="small" statistics={node.statistics} />
-      }
-      bodyStyle={{ height: '30vh', overflowY: 'auto' }}
+      bodyStyle={{ height: '30vh', paddingTop: '0', overflowY: 'auto' }}
       extra={
-        <NodeActions withNavigation={false} node={node} />
+        <NodeActions
+          size="small"
+          buttonType="default"
+          withNavigation={false}
+          node={node}
+        />
       }
     >
       <NodeList

@@ -69,42 +69,50 @@ const ChessView: FC<NodeViewProps> = ({ onNodeSubtree }) => {
 				>
 					<TwoColumnLayout
 						first={
-							<div style={{
-								width: '100%',
-								display: 'flex',
-								justifyContent: 'center',
-								backgroundColor: grey.lightest
-							}}>
-								<Chessboard
-									position={currentPosition}
-									orientation={boardOrientation}
-									onPositionChange={setCurrentPosition}
-								/>
-							</div>
+							<>
+								<div style={{
+									width: '100%',
+									display: 'flex',
+									justifyContent: 'center',
+									backgroundColor: grey.lightest
+								}}>
+									<Chessboard
+										position={currentPosition}
+										orientation={boardOrientation}
+										onPositionChange={setCurrentPosition}
+									/>
+								</div>
+								<div>
+									<ChessboardToolbar
+										onToStartPosition={() => setCurrentPosition(bodyPosition)}
+									/>
+								</div>
+							</>
 						}
 						second={
 							<>
-								<ChessboardToolbar
-									onToStartPosition={() => setCurrentPosition(bodyPosition)}
-								/>
-								<Divider />
 								<Collapse
-									defaultActiveKey={['analysis']}
+									defaultActiveKey={['overall']}
 									items={[
+										{
+											key: 'overall',
+											label: 'Overall Information',
+											children: <p>Overall panel</p>,
+										},
 										{
 											key: 'analysis',
 											label: 'Position Analysis',
-											children: <p>This is panel header 1</p>,
+											children: <p>Position analysis panel</p>,
 										},
 										{
 											key: 'keySquares',
 											label: 'Key Squares',
-											children: <p>This is panel header 1</p>,
+											children: <p>Key squares panel</p>,
 										},
 										{
 											key: 'lines',
 											label: 'Lines and Ideas',
-											children: <p>This is panel header 1</p>,
+											children: <p>Lines and Ideas panel</p>,
 										}
 									]}
 								/>

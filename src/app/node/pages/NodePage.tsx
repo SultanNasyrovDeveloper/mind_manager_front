@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
-import NodeBreadcrumbs from 'app/node/components/NodeBreadcrumbs';
 import BackButton from 'lib/components/BackButton';
+import NodeBreadcrumbs from 'app/node/components/NodeBreadcrumbs';
+import Preloader from 'lib/components/Preloader';
 import useAsync from 'lib/hooks/useAsync';
 import { useNodeStore } from 'store/node';
 import { Row, Col, Card, Layout, Space } from 'ui';
@@ -14,6 +15,7 @@ const NodePage: FC<NodePageProps> = (
 ) => {
   const { nodeId } = useParams();
   const node = useNodeStore(state => state.detail);
+  const isNodeLoading = useNodeStore(state => state.isDetailLoading);
   const currentNodeId = useNodeStore(state => state.id);
   const fetchNode = useNodeStore(state => state.fetchDetail);
   
@@ -25,7 +27,8 @@ const NodePage: FC<NodePageProps> = (
   
   return (
     <>
-      {node &&
+      {isNodeLoading && <Preloader />}
+      {(node && !isNodeLoading) &&
         <Layout>
           <Row>
             <Col span={24}>

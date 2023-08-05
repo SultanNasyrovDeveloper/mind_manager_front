@@ -22,7 +22,7 @@ const StyledCard = styled<FC<CardProps>>(BaseCard)`
     padding: 0;
   }
 	.card-body {
-    padding: ${props => props.noBodyPadding ? 0 : '8px 16px'};
+    padding: ${props => props.noBodyPadding ? 0 : '16px'};
 	}
 	
 	.card-extra-container {

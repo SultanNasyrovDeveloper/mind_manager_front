@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { PalaceNode } from 'types';
 import LearningStatistics from './LearningStatistics';
 
-export interface IGeneralInfoCardProps {
+export interface GeneralInfoCardProps {
   node: PalaceNode;
   onNodePalaceClick: (node: PalaceNode) => void;
   onUpdate: (updateData: Partial<PalaceNode>) => void;
@@ -21,7 +21,7 @@ const PointerText = styled(Typography.Text)`
   cursor: pointer;
 `;
 
-const GeneralInfoCard: FC<IGeneralInfoCardProps> = (props) => {
+const GeneralInfoCard: FC<GeneralInfoCardProps> = (props) => {
 
   const { node, onNodePalaceClick, onUpdate } = props;
   return (

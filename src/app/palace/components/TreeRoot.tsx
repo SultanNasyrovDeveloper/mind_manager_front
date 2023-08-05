@@ -24,7 +24,7 @@ const TreeRoot: FC<TreeRootProps> = (
       extra={
         <Space>
           <LearningStatistics statistics={node.statistics} />
-          <RootActions node={node} />
+          <RootActions buttonType="default" node={node} />
         </Space>
       }
     />

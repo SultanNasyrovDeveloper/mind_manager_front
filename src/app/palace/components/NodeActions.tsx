@@ -1,11 +1,8 @@
 import React, { FC } from 'react';
 import { TreeNode } from 'types/palace';
-import { Space, Button, Link, Dropdown } from 'ui';
-import { SizedComponent } from 'ui/types';
+import { Space, Button, Link, Dropdown, ButtonType, SizedComponent } from 'ui';
 import {
   CaretUpOutlined,
-  CaretRightOutlined,
-  CaretLeftOutlined,
   FormOutlined,
   BarsOutlined
 } from 'ui/icons';
@@ -13,6 +10,7 @@ import {
 export interface NodeActionsProps extends SizedComponent {
   node: TreeNode;
   withNavigation?: boolean;
+  buttonType?: ButtonType;
 }
 
 const NodeActions: FC<NodeActionsProps> = (
@@ -20,6 +18,7 @@ const NodeActions: FC<NodeActionsProps> = (
     node,
     size = 'middle',
     withNavigation = true,
+    buttonType = 'text',
     ...rest
   }
 ) => {
@@ -28,7 +27,7 @@ const NodeActions: FC<NodeActionsProps> = (
       {withNavigation &&
         <Link to={`/palace/${node.parent}`}>
           <Button
-            type="text"
+            type={buttonType}
             size={size}
             icon={<CaretUpOutlined />}
             disabled={!node.parent}
@@ -38,7 +37,7 @@ const NodeActions: FC<NodeActionsProps> = (
       <Link to={`/palace/node/${node.id}`}>
         <Button
           size={size}
-          type="text"
+          type={buttonType}
           icon={<FormOutlined />}
         />
       </Link>
@@ -48,7 +47,7 @@ const NodeActions: FC<NodeActionsProps> = (
       >
         <Button
           size={size}
-          type="text"
+          type={buttonType}
           icon={<BarsOutlined />}
         />
       </Dropdown>

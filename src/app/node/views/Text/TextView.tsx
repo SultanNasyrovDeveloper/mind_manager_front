@@ -15,6 +15,7 @@ import { PalaceNode } from 'types';
 import { TextEditor, Card } from 'ui';
 import GeneralInfoCard from '../../components/GeneralInfoCard';
 import BodyActions from '../../components/BodyActions';
+import NodeMediaList from '../../media/NodeMediaCard';
 import { NodeViewProps } from '../../types';
 
 const TextView: FC<NodeViewProps> = ({ onNodeSubtree}) => {
@@ -38,6 +39,7 @@ const TextView: FC<NodeViewProps> = ({ onNodeSubtree}) => {
 		<TwoColumnLayout
 			first={
 				<Card
+					title="Text Editor"
 					extra={
 						<>
 							{body &&
@@ -63,14 +65,18 @@ const TextView: FC<NodeViewProps> = ({ onNodeSubtree}) => {
 			second={
 				<>
 					{node &&
-            <GeneralInfoCard
-              node={node as PalaceNode}
-              onNodePalaceClick={() => onNodeSubtree && onNodeSubtree()}
-              onUpdate={(updateData) => updateNode(
-								node.id,
-	              updateData
-              )}
-            />
+						<>
+              <GeneralInfoCard
+		            node={node as PalaceNode}
+                onNodePalaceClick={() => onNodeSubtree && onNodeSubtree()}
+                onUpdate={(updateData) => updateNode(
+									node.id,
+									updateData
+								)}
+              />
+              <NodeMediaList />
+						</>
+      
 					}
 				</>
 			}
