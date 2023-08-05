@@ -2,6 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { Outlet } from 'react-router-dom';
 import UserMenu from 'app/user/components/UserMenu';
 import useAsyncOnce from 'lib/hooks/useAsyncOnce';
+import { useLearningSessionStore } from 'store/learning-session';
 import { useUserStore } from 'store/user';
 import { AppLayout, Row, SidebarMenu } from 'ui';
 import { AppstoreOutlined, ApartmentOutlined } from 'ui/icons';
@@ -10,7 +11,13 @@ export interface AppProps { }
 
 const App: FC<AppProps> = ({...rest}) => {
   const user = useUserStore(state => state.currentUser);
+  const activeLearningSession = useLearningSessionStore(
+    state => state.activeSession
+  );
   const fetchMe = useUserStore(state => state.fetchMe);
+  const fetchMyActiveLearningSession = useLearningSessionStore(
+    state => state.fetchActive
+  );
   const sidebarItems = useMemo(() => [
     {
       key: 'dashboard',
@@ -25,8 +32,8 @@ const App: FC<AppProps> = ({...rest}) => {
   ], [user]);
   
   useAsyncOnce(async () => {
-    console.log('loading user')
     if (!user) await fetchMe();
+    if (!activeLearningSession) await fetchMyActiveLearningSession()
   });
   
   return (

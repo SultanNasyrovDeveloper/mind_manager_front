@@ -45,7 +45,7 @@ const Card: FC<CardProps> = (
 		<StyledCard {...rest}>
 			<Row className="card-header">
 				<Col span={18}>
-					{ title }
+					{title}
 				</Col>
 				<Col span={6} className="card-extra-container">
 					{extra}

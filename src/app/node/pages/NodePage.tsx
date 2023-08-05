@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import BackButton from 'lib/components/BackButton';
+import LearningSessionControlPanel
+  from 'app/learning-session/components/LearningControlPanel';
 import NodeBreadcrumbs from 'app/node/components/NodeBreadcrumbs';
 import Preloader from 'lib/components/Preloader';
 import useAsync from 'lib/hooks/useAsync';
@@ -29,7 +31,7 @@ const NodePage: FC<NodePageProps> = (
     <>
       {isNodeLoading && <Preloader />}
       {(node && !isNodeLoading) &&
-        <Layout>
+        <Layout style={{ overflowY: 'scroll' }}>
           <Row>
             <Col span={24}>
               <Card
@@ -42,6 +44,7 @@ const NodePage: FC<NodePageProps> = (
                     />
                   </Space>
                 }
+                extra={<LearningSessionControlPanel />}
               />
             </Col>
           </Row>

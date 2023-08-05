@@ -11,7 +11,6 @@ export enum QueueGenerationStrategy {
 
 export type RepetitionRating = 1 | 2 | 3 | 4 | 5 | 6;
 
-
 export interface LearningSession {
 	id: number;
 	is_active: boolean,
@@ -39,8 +38,7 @@ export interface StartLearningSessionData {
 	queue_generation_strategy: QueueGenerationStrategy;
 }
 
-export interface ISubmitRepetitionData {
+export interface SubmitRepetitionData {
 	node: number;
 	rating: RepetitionRating;
 }
-export type SubmitRepetitionData = ISubmitRepetitionData;
