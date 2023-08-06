@@ -32,29 +32,36 @@ const NodeSelectField: FC<NodeSelectFieldProps> = (
 		if (value && value.length > 0) {
 			const optionIds = options.map(option => option.value);
 			const idsWithNoOption = value.filter(id => !optionIds.includes(id));
-			if (idsWithNoOption) {
+			if (idsWithNoOption.length > 0) {
 				const queryParams = { id_in: idsWithNoOption.join() }
 				const [paginatedResult, error] = await client.nodes.list(queryParams);
-				if (!error && paginatedResult) setOptions(
-					paginatedResult.results.map(apiObjectToOption)
+				if (!error && paginatedResult) setOptions(prev => [
+					...prev,
+					...paginatedResult.results.map(apiObjectToOption)
+					]
 				);
 			}
 		}
-	}, [search]);
+	}, [value]);
 	
 	useDebounce(async () => {
 		setIsOptionsLoading(true);
 		const queryParams = { name: search, limit: 15 };
 		const [paginatedResult, error] = await client.nodes.list(queryParams);
-		if (!error && paginatedResult) setOptions(
-			paginatedResult.results.map(node => apiObjectToOption(node))
-		);
+		if (!error && paginatedResult) {
+			const valueOptions = options.filter(
+				option => value.includes(option.value as number)
+			);
+			const apiOptions = paginatedResult.results.map(apiObjectToOption);
+			setOptions([...valueOptions, ...apiOptions]);
+		}
 		if (error) notification.error({
 			message: 'Unable to load node options',
 			description: String(error)
-		})
+		});
 		setIsOptionsLoading(false);
-	}, 500, [search]);
+	}, 700, [search]);
+	
   return (
     <SelectField
 	    name={name}

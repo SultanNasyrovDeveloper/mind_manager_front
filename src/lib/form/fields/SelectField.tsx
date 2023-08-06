@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { SelectProps } from 'ui';
 import { FormItem, Select } from '..';
 import { FormFieldProps } from '../types';
@@ -9,9 +9,12 @@ export interface SelectFieldProps
 const SelectField: FC<SelectFieldProps> = (
 	{ name, controlProps, ...rest }
 ) => {
+	const control = useMemo(() => (
+		<Select name={name} {...controlProps} />
+	), [name, controlProps]);
   return (
     <FormItem name={name} {...rest}>
-	    <Select name={name} {...controlProps} />
+	    { control }
     </FormItem>
   );
 };

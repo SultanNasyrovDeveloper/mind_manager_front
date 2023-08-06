@@ -8,7 +8,7 @@ import LearningSessionForm from '../forms/learning-session';
 export interface LearningControlPanelProps {}
 
 const LearningControlPanel: FC<LearningControlPanelProps> = (
-	{...rest}
+	{ ...rest }
 ) => {
 	const nodeId = useNodeStore(state => state.detail?.id);
 	const [isOpen, , toggleIsOpen] = useOpen();

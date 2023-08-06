@@ -24,7 +24,9 @@ export const sizeToPixel: Record<string, number> = {
   large: textLevelToPixels[1],
 }
 
-const Text: FC<TextProps> = ({ isHeader, children, ...rest }) => {
+const Text: FC<TextProps> = (
+  { isHeader, isPointable, children, ...rest }
+) => {
   return (
     <>
       {isHeader &&
