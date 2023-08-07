@@ -1,17 +1,16 @@
 import React, { FC, useRef, useCallback, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FormProps } from 'lib/form';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { FormState } from 'lib/form';
 import FormActions from 'lib/form/FormActions';
 import { useUserStore, getIsCurrentUserAuthenticated } from 'store/user';
 import { LoginCredentials } from 'types/auth';
 import { Row, Col, Card } from 'ui';
 import LoginForm from '../forms/LoginForm';
 
-export interface LoginPageProps {}
-
-const LoginPage: FC<LoginPageProps> = ({...rest}) => {
+const LoginPage: FC = () => {
+  const location = useLocation();
   const navigate = useNavigate();
-  const loginFormRef = useRef<FormProps<LoginCredentials>>(null);
+  const loginFormRef = useRef<FormState<LoginCredentials>>(null);
   const isAuthenticated = useUserStore(getIsCurrentUserAuthenticated);
   const fetchAuthTokens = useUserStore(state => state.fetchAuthTokens);
   const fetchMe = useUserStore(state => state.fetchMe);
@@ -24,7 +23,7 @@ const LoginPage: FC<LoginPageProps> = ({...rest}) => {
   
   useEffect(() => {
     if (isAuthenticated) navigate('/dashboard');
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, location]);
   
   return (
     <Row justify="center">

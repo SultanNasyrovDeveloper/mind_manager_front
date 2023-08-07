@@ -28,6 +28,7 @@ const NodeList: FC<NodeListProps> = (
 			    extra={
 						<NodeActions
 							withNavigation={false}
+							withCreateSubnode={false}
 							size="small"
 							node={node}
 						/>

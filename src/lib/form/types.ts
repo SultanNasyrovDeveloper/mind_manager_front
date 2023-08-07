@@ -1,7 +1,8 @@
 import type {
 	FormikConfig,
 	FormikValues as FormValues,
-	FormikProps as FormProps,
+	FormikFormProps as FormProps,
+	FormikProps as FormState
 } from 'formik';
 import type {
 	DefaultOptionType as OptionProps
@@ -15,7 +16,7 @@ export interface FormFieldProps<ControlProps = Record<string, unknown>>
 
 export interface FormManagerProps<DataType>
 	extends FormikConfig<DataType> {
-	formProps?: FormProps<DataType>;
+	formProps?: FormProps;
 }
 
-export { FormProps, FormValues, OptionProps };
+export { FormProps, FormValues, OptionProps, FormState };

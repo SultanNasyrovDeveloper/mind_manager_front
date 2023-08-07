@@ -3,6 +3,7 @@ import _ from 'lodash';
 import client from 'api';
 import useAsync from 'lib/hooks/useAsync';
 import useDebounce from 'lib/hooks/useDebounce';
+import usePrevious from 'lib/hooks/usePrevoius';
 import { apiObjectToOption } from 'lib/utils/ui';
 import { SelectItemProps, notification } from 'ui';
 import { SelectProps, useFormContext } from '..';
@@ -10,26 +11,32 @@ import SelectField, { SelectFieldProps } from './SelectField';
 
 export interface NodeSelectFieldProps
 	extends Omit<SelectFieldProps, 'controlProps'> {
-	controlProps?: Omit<
-		SelectProps<number>,
-		'name' | 'options' | 'searchValue' | 'onSearch' | 'loading'
-	>;
+	controlProps?: Omit<SelectProps<number>, 'name' | 'options' | 'searchValue' | 'onSearch' | 'loading'>;
 }
 
 const NodeSelectField: FC<NodeSelectFieldProps> = (
-	{ name, controlProps, ...fieldProps}
+	{
+		name,
+		controlProps,
+		...fieldProps
+	}
 ) => {
 	const { values } = useFormContext();
 	const value = useMemo<number[]>(
 		() => _.get(values, name, []),
 		[values, name]
 	);
+	const previousValue = usePrevious<number[]>(value);
+	const mode = useMemo(() => controlProps?.mode || '', []);
 	const [search, setSearch] = useState('');
 	const [isOptionsLoading, setIsOptionsLoading] = useState(false);
 	const [options, setOptions] = useState<SelectItemProps[]>([]);
 	
 	useAsync(async () => {
-		if (value && value.length > 0) {
+		const isNeedToLoadOptions = value
+			&& value !== previousValue
+			&& value.length > 0;
+		if (isNeedToLoadOptions) {
 			const optionIds = options.map(option => option.value);
 			const idsWithNoOption = value.filter(id => !optionIds.includes(id));
 			if (idsWithNoOption.length > 0) {
@@ -66,8 +73,6 @@ const NodeSelectField: FC<NodeSelectFieldProps> = (
     <SelectField
 	    name={name}
 	    controlProps={{
-				allowClear: true,
-				mode: 'multiple',
 				...controlProps,
 		    loading: isOptionsLoading,
 		    options: options,

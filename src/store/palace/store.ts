@@ -35,6 +35,6 @@ export const usePalaceStore = createApiEndpointStore<
 				description: 'Failed to load subtree data. ' + String(error)
 			});
 			return subtree;
-		}
+		},
 	})
 );
