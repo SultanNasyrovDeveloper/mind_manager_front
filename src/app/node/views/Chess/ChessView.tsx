@@ -9,12 +9,11 @@ import {
 import { PalaceNode } from 'types';
 import {
 	Card,
-	Divider,
 	Collapse,
 	Chessboard,
-	IChessFen,
+	Fen,
 	DEFAULT_POSITION,
-	IChessboardOrientation
+	BoardOrientation
 } from 'ui';
 import { grey } from 'ui/colors';
 import GeneralInfoCard from '../../components/GeneralInfoCard';
@@ -25,9 +24,9 @@ import ChessboardToolbar from './Toolbar';
 
 const ChessView: FC<NodeViewProps> = ({ onNodeSubtree }) => {
 	const [currentPosition, setCurrentPosition] =
-		useState<IChessFen>(DEFAULT_POSITION);
+		useState<Fen>(DEFAULT_POSITION);
 	const [boardOrientation, setBoardOrientation] =
-		useState<IChessboardOrientation>('white');
+		useState<BoardOrientation>('white');
 	const node = useNodeStore(state => state.detail);
 	const body = useNodeBodyStore(state => state.detail);
 	const bodyPosition = useNodeBodyStore(getBodyChessPosition);

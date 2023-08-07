@@ -1,14 +1,14 @@
 import {
-  IChessPiece,
-  IChessPieceAsObject,
-  IChessPieceSymbol,
-  IChessColor
+  Piece,
+  PieceAsObject,
+  PieceSymbol,
+  Color
 } from './types';
 
-export const getPieceAsObject = (piece: IChessPiece): IChessPieceAsObject => {
+export const getPieceAsObject = (piece: Piece): PieceAsObject => {
   const [color, type] = piece.split('');
   return {
-    type: type.toLowerCase() as IChessPieceSymbol,
-    color: color as IChessColor
+    type: type.toLowerCase() as PieceSymbol,
+    color: color as Color
   };
 };

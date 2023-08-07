@@ -4,46 +4,42 @@ import {
   default as BaseChessboard,
   Props as BaseChessboardProps
 } from 'chessboardjsx';
-import {
-  IChessMove,
-  IChessFen,
-  IChessSquare
-} from './types';
+import rough from 'roughjs'
+import { Move, Fen, Square } from './types';
 import { getPieceAsObject } from './utils';
 
-export interface IChessboardProps extends BaseChessboardProps {
-  position?: IChessFen;
+export interface ChessboardProps
+  extends BaseChessboardProps {
+  position?: Fen;
   isEditMode?: boolean;
-  onPositionChange?: (fen: IChessFen) => void;
+  onPositionChange?: (fen: Fen) => void;
 }
 
-const Chessboard: FC<IChessboardProps> = (props) => {
-  const {
-    position = DEFAULT_POSITION,
-    isEditMode = false,
-    onPositionChange,
-    ...rest
-  } = props;
-
-  const [boardPosition, setBoardPosition] = useState<IChessFen>(DEFAULT_POSITION);
+const Chessboard: FC<ChessboardProps> = ({
+  position = DEFAULT_POSITION,
+  isEditMode = false,
+  onPositionChange,
+  ...boardProps
+}) => {
+  const [boardPosition, setBoardPosition] = useState<Fen>(DEFAULT_POSITION);
   const [chess, setChess] = useState<Chess>(new Chess(boardPosition));
 
-  const initSquare = useCallback((roughSquare: SVGElement) => {
-    console.log(roughSquare);
-  }, []);
-
-  const handlePieceDrop = useCallback((move: IChessMove) => {
+  const handlePieceDrop = useCallback((move: Move) => {
     if (!isEditMode) {
-      chess.move({ from: move.sourceSquare, to: move.targetSquare });
-      setBoardPosition(chess.fen());
-      return;
+      try {
+        chess.move({ from: move.sourceSquare, to: move.targetSquare });
+        setBoardPosition(chess.fen())
+      }
+      finally {
+        return;
+      }
     }
     if (move.sourceSquare !== 'spare') chess.remove(move.sourceSquare);
     chess.put(getPieceAsObject(move.piece), move.targetSquare);
     setBoardPosition(chess.fen());
   }, [isEditMode, chess]);
 
-  const handleSquareRightClick = useCallback((square: IChessSquare) => {
+  const handleSquareRightClick = useCallback((square: Square) => {
     if (isEditMode && chess.get(square)) {
       chess.remove(square);
       setBoardPosition(chess.fen());
@@ -54,25 +50,28 @@ const Chessboard: FC<IChessboardProps> = (props) => {
     setBoardPosition(position);
     setChess(new Chess(position));
   }, [position]);
-
-  useEffect(
-    () => onPositionChange && onPositionChange(boardPosition),
-    [boardPosition, onPositionChange]
-  );
+  
+  const initRoughSquare = (
+    { squareElement }: { squareElement: SVGElement, squareWidth: number }
+  ) => {
+    console.log('Initializing rough square: ', squareElement);
+    squareElement.onclick = () => { console.log('Square clicked')}
+    squareElement.addEventListener('drag', (e) => console.log('Drag', e))
+  }
 
   return (
     <BaseChessboard
-      {...rest}
+      {...boardProps}
       sparePieces={isEditMode}
       position={boardPosition}
-      // roughSquare={initRoughSquare}
+      roughSquare={initRoughSquare}
       onDrop={handlePieceDrop}
-      onSquareRightClick={handleSquareRightClick}
-      // onPieceClick={(piece) => console.log(`${piece} clicked`)}
-      // onDragOverSquare={(square) => console.log(`dragged over. ${square}`)}
+      onDragOverSquare={(square) => console.log(`dragged over. ${square}`)}
       // onMouseOutSquare={(square) => console.log('Mouse Out of square', square)}
       // onMouseOverSquare={(square) => console.log('Mouse Over square', square)}
-      // onSquareClick={(square) => console.log('Square clicked', square)}
+      onPieceClick={(piece) => console.log(`${piece} clicked`)}
+      onSquareClick={(square) => console.log('Square clicked', square)}
+      onSquareRightClick={handleSquareRightClick}
     />
   );
 };

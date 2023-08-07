@@ -1,32 +1,25 @@
-import type {
-  PieceSymbol as IChessPieceSymbol,
-  Color as IChessColor,
-  Square as IChessSquare
-} from 'chess.js';
-export { DEFAULT_POSITION } from 'chess.js';
-import type {
-  Piece as IChessPiece,
-  Position as IChessPosition
-} from 'chessboardjsx';
+import type { PieceSymbol, Color, Square } from 'chess.js';
+import type { Piece, Position } from 'chessboardjsx';
 
-export type IChessFen = string;
-export type IChessboardOrientation = 'white' | 'black';
+export type Fen = string;
+export type BoardOrientation = 'white' | 'black';
 
-export interface IChessMove {
-  piece: IChessPiece;
-  sourceSquare: IChessSquare | 'spare';
-  targetSquare: IChessSquare;
+export interface Move {
+  piece: Piece;
+  sourceSquare: Square | 'spare';
+  targetSquare: Square;
 }
 
-export interface IChessPieceAsObject {
-  color: IChessColor;
-  type: IChessPieceSymbol
+export interface PieceAsObject {
+  color: Color;
+  type: PieceSymbol
 }
 
 export {
-  IChessSquare,
-  IChessPiece,
-  IChessPosition,
-  IChessPieceSymbol,
-  IChessColor
+  Square,
+  Piece,
+  Position,
+  PieceSymbol,
+  Color
 };
+export { DEFAULT_POSITION } from 'chess.js';

@@ -20,7 +20,10 @@ const LearningSessionForm: FC<LearningSessionFormProps> = (
 		    <NodeSelectField
 			    name="targets"
 			    label="Targets"
-			    controlProps={{ placeholder: 'Type node name here...' }}
+			    controlProps={{
+						mode: 'tags',
+						placeholder: 'Type node name here...'
+					}}
 		    />
 	    </Form>
     </FormManager>

@@ -27,27 +27,23 @@ const NodeSelectField: FC<NodeSelectFieldProps> = (
 		[values, name]
 	);
 	const previousValue = usePrevious<number[]>(value);
-	const mode = useMemo(() => controlProps?.mode || '', []);
 	const [search, setSearch] = useState('');
 	const [isOptionsLoading, setIsOptionsLoading] = useState(false);
 	const [options, setOptions] = useState<SelectItemProps[]>([]);
 	
 	useAsync(async () => {
-		const isNeedToLoadOptions = value
-			&& value !== previousValue
-			&& value.length > 0;
-		if (isNeedToLoadOptions) {
-			const optionIds = options.map(option => option.value);
-			const idsWithNoOption = value.filter(id => !optionIds.includes(id));
-			if (idsWithNoOption.length > 0) {
-				const queryParams = { id_in: idsWithNoOption.join() }
-				const [paginatedResult, error] = await client.nodes.list(queryParams);
-				if (!error && paginatedResult) setOptions(prev => [
-					...prev,
-					...paginatedResult.results.map(apiObjectToOption)
-					]
-				);
-			}
+		if (!value || value === previousValue) return;
+		const valueAsArray = Number.isInteger(value) ? [value]: value;
+		if (valueAsArray.length === 0) return;
+		const optionIds = options.map(option => option.value);
+		const idsWithNoOption = value.filter(id => !optionIds.includes(id));
+		if (idsWithNoOption.length > 0) {
+			const queryParams = { id_in: idsWithNoOption.join() }
+			const [paginatedResult, error] = await client.nodes.list(queryParams);
+			if (!error && paginatedResult) setOptions(prev => [
+					...prev, ...paginatedResult.results.map(apiObjectToOption)
+				]
+			);
 		}
 	}, [value]);
 	
