@@ -19,7 +19,10 @@ import {
   CaretUpOutlined,
   FormOutlined,
   BarsOutlined,
-  SisternodeOutlined
+  SisternodeOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  VerticalAlignBottomOutlined
 } from 'ui/icons';
 
 export interface NodeActionsProps extends SizedComponent {
@@ -81,7 +84,27 @@ const NodeActions: FC<NodeActionsProps> = ({
       }
       <Dropdown
         placement="bottomRight"
-        menu={{ items: [] }}
+        menu={{
+          onClick: (item) => console.log(item),
+          items: [
+            {
+              key: 'rename',
+              label: 'Rename',
+              icon: <EditOutlined />
+            },
+            {
+              key: 'move',
+              label: 'Move',
+              icon: <VerticalAlignBottomOutlined />
+            },
+            {
+              key: 'delete',
+              label: 'Delete',
+              icon: <DeleteOutlined />
+              
+            },
+          ]
+        }}
       >
         <Button
           size={size}

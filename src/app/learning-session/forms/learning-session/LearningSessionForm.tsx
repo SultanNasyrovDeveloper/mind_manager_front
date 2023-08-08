@@ -21,7 +21,7 @@ const LearningSessionForm: FC<LearningSessionFormProps> = (
 			    name="targets"
 			    label="Targets"
 			    controlProps={{
-						mode: 'tags',
+						mode: 'multiple',
 						placeholder: 'Type node name here...'
 					}}
 		    />
