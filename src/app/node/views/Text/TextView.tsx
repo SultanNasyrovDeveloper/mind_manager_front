@@ -15,7 +15,7 @@ import { PalaceNode } from 'types';
 import { TextEditor, Card } from 'ui';
 import GeneralInfoCard from '../../components/GeneralInfoCard';
 import BodyActions from '../../components/BodyActions';
-import NodeMediaList from '../../media/NodeMediaCard';
+import NodeMediaList from '../../components/media/NodeMediaCard';
 import { NodeViewProps } from '../../types';
 
 const TextView: FC<NodeViewProps> = ({ onNodeSubtree}) => {

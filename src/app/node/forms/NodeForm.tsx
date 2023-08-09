@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import * as yup from 'yup';
 import { FormManager, FormManagerProps, Form } from 'lib/form';
-import InputField from 'lib/form/fields/InputField';
-import NodeBodyTypeSelectField from 'lib/form/fields/NodeBodyTypeSelectField';
-import NodeSelectField from 'lib/form/fields/NodeSelectField';
-import NumberField from 'lib/form/fields/NumberField';
-import TextField from 'lib/form/fields/TextField';
+// import InputField from 'lib/form/fields/InputField';
+// import NodeBodyTypeSelectField from 'lib/form/fields/NodeBodyTypeSelectField';
+// import NodeSelectField from 'lib/form/fields/NodeSelectField';
+// import NumberField from 'lib/form/fields/NumberField';
+// import TextField from 'lib/form/fields/TextField';
 import { PalaceNode } from 'types/node';
 
 export interface NodeFormProps
@@ -35,13 +35,13 @@ const NodeForm: FC<NodeFormProps> = (
 	    {...formManagerProps}
 	    validationSchema={validationSchema}
     >
-	    <Form layout="vertical" {...formProps}>
-		    <NumberField hidden name="owner" />
-		    <NodeSelectField required name="parent" label="Parent"/>
-		    <InputField required name="name" label="Name" />
-		    <NodeBodyTypeSelectField name="body.type" label="Body Type"  />
-		    <TextField required name="description" label="Description" />
-	    </Form>
+	    {/*<Form layout="vertical" {...formProps}>*/}
+		  {/*  <NumberField hidden name="owner" />*/}
+		  {/*  <NodeSelectField required name="parent" label="Parent"/>*/}
+		  {/*  <InputField required name="name" label="Name" />*/}
+		  {/*  <NodeBodyTypeSelectField name="body.type" label="Body Type"  />*/}
+		  {/*  <TextField required name="description" label="Description" />*/}
+	    {/*</Form>*/}
     </FormManager>
   );
 };

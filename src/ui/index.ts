@@ -6,6 +6,7 @@ export {
 	Drawer,
 	Divider,
 	Dropdown,
+	Form,
 	List,
 	Layout,
 	Menu,
@@ -13,10 +14,12 @@ export {
 	Pagination,
 	Rate,
 	Row,
+	Select,
 	Space,
 	Spin,
 	Tag,
 	Tooltip,
+	Input,
 } from 'antd';
 export * from './app-layout';
 export * from './button';

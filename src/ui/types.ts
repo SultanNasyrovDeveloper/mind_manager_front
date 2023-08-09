@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import type { ItemType, MenuItemType } from 'antd/lib/menu/hooks/useItems';
 import type { SizeType as Size } from 'antd/lib/config-provider/SizeContext';
+import type { SelectValue } from 'antd/lib/select';
 
 export type {
 	BreadcrumbProps,
@@ -9,6 +10,7 @@ export type {
 	DividerProps,
 	DrawerProps,
 	DropdownProps,
+	FormProps,
 	InputProps,
 	ListProps,
 	LayoutProps,
@@ -44,4 +46,4 @@ export interface SizedComponent {
 	size?: Size;
 }
 
-export { ItemType, Size }
+export type { ItemType, Size, SelectValue };

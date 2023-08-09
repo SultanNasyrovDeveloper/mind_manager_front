@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
-import { FormItem, Input, InputProps } from '..';
-import { FormFieldProps } from '../types';
+import { Input, InputProps } from 'ui';
+import Field, { useField, FormFieldProps } from '../Field';
 
 export interface PasswordFieldProps
-	extends FormFieldProps<Omit<InputProps, 'name'>> {}
+	extends FormFieldProps<InputProps> {}
 
 const PasswordField: FC<PasswordFieldProps> = (
-	{ name, controlProps, ...rest}
+	{ name, label, controlProps, ...rest}
 ) => {
+	const [field] = useField(name);
+	
   return (
-    <FormItem name={name} {...rest} >
-	    <Input.Password name={name} {...controlProps} />
-    </FormItem>
+	  <Field name={name} label={label} {...rest}>
+		  <Input.Password {...field} {...controlProps} />
+	  </Field>
   );
 };
 

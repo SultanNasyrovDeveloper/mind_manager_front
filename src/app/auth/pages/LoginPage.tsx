@@ -1,7 +1,7 @@
 import React, { FC, useRef, useCallback, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FormState } from 'lib/form';
-import FormActions from 'lib/form/FormActions';
+import FormActions from 'lib/components/FormActions';
 import { useUserStore, getIsCurrentUserAuthenticated } from 'store/user';
 import { LoginCredentials } from 'types/auth';
 import { Row, Col, Card } from 'ui';

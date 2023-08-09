@@ -1,11 +1,11 @@
 import { Identifier } from 'types/core';
-import { OptionProps } from '.';
+import { SelectItemProps } from 'ui';
 
 export const toSelectOption = (
 	apiObject: { id: Identifier, name: string },
-	additional: Partial<OptionProps> = {}
-): OptionProps => ({
-	key: apiObject.id,
+	additional: Partial<SelectItemProps> = {}
+): SelectItemProps => ({
+	key: String(apiObject.id),
 	label: apiObject.name,
 	value: apiObject.id,
 	...additional

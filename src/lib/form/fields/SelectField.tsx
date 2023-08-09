@@ -1,21 +1,21 @@
-import React, { FC, useMemo } from 'react';
-import { SelectProps } from 'ui';
-import { FormItem, Select } from '..';
-import { FormFieldProps } from '../types';
+import React, { FC } from 'react';
+import { Select, SelectProps, SelectValue } from 'ui';
+import { FormFieldProps, useField } from '..';
+import Field from '../Field';
 
-export interface SelectFieldProps
-	extends FormFieldProps<SelectProps> {}
+export interface SelectFieldProps<ValueType = SelectValue>
+  extends FormFieldProps<SelectProps<ValueType>> {}
 
 const SelectField: FC<SelectFieldProps> = (
-	{ name, controlProps, ...rest }
+  { name, controlProps, ...rest}
 ) => {
-	const control = useMemo(() => (
-		<Select name={name} {...controlProps} />
-	), [name, controlProps]);
+  
+  const [field] = useField(name);
+  
   return (
-    <FormItem name={name} {...rest}>
-	    { control }
-    </FormItem>
+    <Field name={name}>
+      <Select {...field} {...controlProps}  />
+    </Field>
   );
 };
 

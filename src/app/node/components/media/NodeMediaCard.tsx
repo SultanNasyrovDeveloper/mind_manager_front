@@ -21,7 +21,7 @@ import {
   EyeOutlined,
   PlusOutlined
 } from 'ui/icons';
-import NodeMediaForm, { NodeMediaFormProps } from './NodeMediaForm';
+import NodeMediaForm, { NodeMediaFormProps } from '../../forms/NodeMediaForm';
 
 export interface NodeMediaCardProps
   extends Omit<CardProps, 'extra' | 'children'> {

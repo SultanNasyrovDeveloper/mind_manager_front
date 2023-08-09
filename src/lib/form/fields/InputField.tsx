@@ -1,17 +1,20 @@
 import React, { FC } from 'react';
-import { FormItem, Input, InputProps } from '..';
-import { FormFieldProps } from '../types';
+import { Input, InputProps } from 'ui';
+import Field, { useField, FormFieldProps } from '../Field';
 
 export interface InputFieldProps
-  extends FormFieldProps<InputProps> {}
+	extends FormFieldProps<InputProps> {
+}
 
 const InputField: FC<InputFieldProps> = (
-  { name, controlProps, ...rest}
+	{ name, label, controlProps, ...rest }
 ) => {
+	const [field] = useField(name);
+	
   return (
-    <FormItem name={name} {...rest}>
-      <Input name={name} {...controlProps} />
-    </FormItem>
+	  <Field name={name} label={label}>
+		  <Input {...field} {...controlProps} />
+	  </Field>
   );
 };
 

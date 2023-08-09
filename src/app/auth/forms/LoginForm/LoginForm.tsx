@@ -1,40 +1,35 @@
 import React, { FC } from 'react';
-import {
-  FormManager,
-  FormManagerProps,
-  Form,
-  EmailField,
-  PasswordField
-} from 'lib/form';
+import Form, { FormProps } from 'lib/form';
+import InputField from 'lib/form/fields/InputField';
+import PasswordField from 'lib/form/fields/PasswordField';
 import { LoginCredentials } from 'types/auth';
 import { loginFormValidationSchema } from './validation';
 
 export interface LoginFormProps
-  extends Omit<FormManagerProps<LoginCredentials>, 'initialValues'> {
+  extends FormProps<LoginCredentials> {
 
 }
 
-const LoginForm: FC<LoginFormProps> = ({...rest}) => {
+const LoginForm: FC<LoginFormProps> = (
+  { initialValues, ...rest}
+) => {
   return (
-    <FormManager
+    <Form
       validateOnBlur
-      initialValues={{ email: '', password: '' }}
+      initialValues={initialValues || {}}
       validationSchema={loginFormValidationSchema}
       {...rest}
     >
-      <Form layout="vertical">
-        <EmailField
-          name="email"
-          label="Email"
-          controlProps={{ placeholder: 'Enter email' }}
-        />
-        <PasswordField
-          name="password"
-          label="Password"
-          controlProps={{ placeholder: 'Enter your password...' }}
-        />
-      </Form>
-    </FormManager>
+      <InputField
+        name="email"
+        label="Email"
+        controlProps={{ type: 'email'}}
+      />
+      <PasswordField
+        name="password"
+        label="Password"
+      />
+    </Form>
   );
 };
 
