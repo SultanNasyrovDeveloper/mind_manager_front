@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 import type { ItemType, MenuItemType } from 'antd/lib/menu/hooks/useItems';
 import type { SizeType as Size } from 'antd/lib/config-provider/SizeContext';
 import type { SelectValue } from 'antd/lib/select';
+import type { ValidateStatus } from 'antd/lib/form/FormItem';
+import type { TextAreaProps } from 'antd/lib/input/TextArea';
 
 export type {
 	BreadcrumbProps,
@@ -11,7 +13,9 @@ export type {
 	DrawerProps,
 	DropdownProps,
 	FormProps,
+	FormItemProps,
 	InputProps,
+	InputNumberProps,
 	ListProps,
 	LayoutProps,
 	MenuProps,
@@ -46,4 +50,4 @@ export interface SizedComponent {
 	size?: Size;
 }
 
-export type { ItemType, Size, SelectValue };
+export type { ItemType, Size, SelectValue, ValidateStatus, TextAreaProps };

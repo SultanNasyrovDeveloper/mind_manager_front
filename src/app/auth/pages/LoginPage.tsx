@@ -1,6 +1,6 @@
 import React, { FC, useRef, useCallback, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FormState } from 'lib/form';
+import { FormRef } from 'lib/form';
 import FormActions from 'lib/components/FormActions';
 import { useUserStore, getIsCurrentUserAuthenticated } from 'store/user';
 import { LoginCredentials } from 'types/auth';
@@ -10,7 +10,7 @@ import LoginForm from '../forms/LoginForm';
 const LoginPage: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const loginFormRef = useRef<FormState<LoginCredentials>>(null);
+  const loginFormRef = useRef<FormRef<LoginCredentials>>(null);
   const isAuthenticated = useUserStore(getIsCurrentUserAuthenticated);
   const fetchAuthTokens = useUserStore(state => state.fetchAuthTokens);
   const fetchMe = useUserStore(state => state.fetchMe);
@@ -32,6 +32,7 @@ const LoginPage: FC = () => {
           <LoginForm
             innerRef={loginFormRef}
             onSubmit={handleLogin}
+            innerFormProps={{ layout: 'vertical' }}
           />
           <Row justify="end">
             <Link to="#">Sign Up</Link>

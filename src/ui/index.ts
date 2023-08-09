@@ -20,6 +20,7 @@ export {
 	Tag,
 	Tooltip,
 	Input,
+	InputNumber,
 } from 'antd';
 export * from './app-layout';
 export * from './button';

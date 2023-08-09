@@ -1,16 +1,14 @@
 import React, { FC } from 'react';
 import * as yup from 'yup';
-import { FormManager, FormManagerProps, Form } from 'lib/form';
-// import InputField from 'lib/form/fields/InputField';
-// import NodeBodyTypeSelectField from 'lib/form/fields/NodeBodyTypeSelectField';
-// import NodeSelectField from 'lib/form/fields/NodeSelectField';
-// import NumberField from 'lib/form/fields/NumberField';
-// import TextField from 'lib/form/fields/TextField';
+import Form, { FormProps } from 'lib/form';
+import InputField from 'lib/form/fields/InputField';
+import NumberField from 'lib/form/fields/NumberField';
+import TextField from 'lib/form/fields/TextField';
+import NodeBodyTypeSelectField from 'lib/form/fields/NodeBodyTypeSelectField';
 import { PalaceNode } from 'types/node';
 
 export interface NodeFormProps
-	extends Omit<FormManagerProps<Partial<PalaceNode>>, 'initialValues' | 'validationSchema'> {
-	initialValues?: Partial<PalaceNode>;
+	extends FormProps<Partial<PalaceNode>> {
 	hiddenFields?: keyof PalaceNode;
 }
 
@@ -27,22 +25,20 @@ const validationSchema = yup.object().shape({
 });
 
 const NodeForm: FC<NodeFormProps> = (
-	{ initialValues, formProps, hiddenFields = [], ...formManagerProps }
+	{ initialValues, ...formProps }
 ) => {
   return (
-    <FormManager
+    <Form
 	    initialValues={initialValues || {}}
-	    {...formManagerProps}
 	    validationSchema={validationSchema}
+	    {...formProps}
     >
-	    {/*<Form layout="vertical" {...formProps}>*/}
-		  {/*  <NumberField hidden name="owner" />*/}
-		  {/*  <NodeSelectField required name="parent" label="Parent"/>*/}
-		  {/*  <InputField required name="name" label="Name" />*/}
-		  {/*  <NodeBodyTypeSelectField name="body.type" label="Body Type"  />*/}
-		  {/*  <TextField required name="description" label="Description" />*/}
-	    {/*</Form>*/}
-    </FormManager>
+	    <NumberField hidden name="owner" />
+	    <NumberField hidden name="parent" />
+	    <InputField name="name" label="Name" />
+	    <NodeBodyTypeSelectField name="type" label="Type" />
+	    <TextField name="description" label="Description" />
+    </Form>
   );
 };
 

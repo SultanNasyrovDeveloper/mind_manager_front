@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef } from 'react';
 import NodeForm from 'app/node/forms/NodeForm';
 import FormActions from 'lib/components/FormActions';
-import { FormState } from 'lib/form/types';
+import { FormRef } from 'lib/form';
 import useOpen from 'lib/hooks/useOpen';
 import { TreeNode } from 'types/palace';
 import { PalaceNode } from 'types/node';
@@ -40,7 +40,7 @@ const NodeActions: FC<NodeActionsProps> = ({
   buttonType = 'text',
 }) => {
   
-  const createNodeFormRef = useRef<FormState<Partial<PalaceNode>>>(null)
+  const createNodeFormRef = useRef<FormRef<Partial<PalaceNode>>>(null)
   const [createNodeParent, setCreateNodeParent] = useState<number | undefined>();
   const [isDrawerOpen, setIsDrawerOpen] = useOpen();
   const userId = useUserStore(state => state.currentUser?.id);
@@ -127,8 +127,10 @@ const NodeActions: FC<NodeActionsProps> = ({
       >
         <NodeForm
           enableReinitialize
+          validateOnBlur
           innerRef={createNodeFormRef}
           initialValues={{ parent: createNodeParent, owner: userId }}
+          innerFormProps={{ layout: 'vertical' }}
           onSubmit={(data) => console.log(data)}
         />
       </Drawer>

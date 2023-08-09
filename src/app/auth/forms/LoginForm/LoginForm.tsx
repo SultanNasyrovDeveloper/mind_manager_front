@@ -6,29 +6,21 @@ import { LoginCredentials } from 'types/auth';
 import { loginFormValidationSchema } from './validation';
 
 export interface LoginFormProps
-  extends FormProps<LoginCredentials> {
-
+  extends Omit<FormProps<LoginCredentials>, 'initialValues'> {
 }
 
 const LoginForm: FC<LoginFormProps> = (
-  { initialValues, ...rest}
+  { ...rest}
 ) => {
   return (
     <Form
       validateOnBlur
-      initialValues={initialValues || {}}
+      initialValues={{ email: '', password: '' }}
       validationSchema={loginFormValidationSchema}
       {...rest}
     >
-      <InputField
-        name="email"
-        label="Email"
-        controlProps={{ type: 'email'}}
-      />
-      <PasswordField
-        name="password"
-        label="Password"
-      />
+      <InputField name="email" label="Email" type="email"/>
+      <PasswordField name="password" label="Password"/>
     </Form>
   );
 };

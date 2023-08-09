@@ -1,22 +1,21 @@
 import React, { FC } from 'react';
-import { FormManager, FormManagerProps, Form } from 'lib/form';
+import Form, { FormProps } from 'lib/form';
 // import NodeSelectField from 'lib/form/fields/NodeSelectField';
 import { LearningSession } from 'types/learningSession';
 
 export interface LearningSessionFormProps
-	extends Omit<FormManagerProps<Partial<LearningSession>>, 'initialValues'> {
+	extends Omit<FormProps<Partial<LearningSession>>, 'initialValues'> {
 	initialValues?: Partial<LearningSession>;
 }
 
 const LearningSessionForm: FC<LearningSessionFormProps> = (
-	{ initialValues, formProps, ...formManagerProps }
+	{ initialValues, ...formManagerProps }
 ) => {
   return (
-    <FormManager
+    <Form
 	    initialValues={initialValues || {}}
 	    {...formManagerProps}
     >
-	    <Form {...formProps}>
 		    {/*<NodeSelectField*/}
 			  {/*  name="targets"*/}
 			  {/*  label="Targets"*/}
@@ -25,8 +24,7 @@ const LearningSessionForm: FC<LearningSessionFormProps> = (
 				{/*		placeholder: 'Type node name here...'*/}
 				{/*	}}*/}
 		    {/*/>*/}
-	    </Form>
-    </FormManager>
+    </Form>
   );
 };
 

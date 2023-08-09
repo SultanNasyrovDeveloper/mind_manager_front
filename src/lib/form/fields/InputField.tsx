@@ -3,17 +3,16 @@ import { Input, InputProps } from 'ui';
 import Field, { useField, FormFieldProps } from '../Field';
 
 export interface InputFieldProps
-	extends FormFieldProps<InputProps> {
-}
+	extends FormFieldProps, Omit<InputProps, 'name'> {}
 
 const InputField: FC<InputFieldProps> = (
-	{ name, label, controlProps, ...rest }
+	{ name, label, ...controlProps }
 ) => {
 	const [field] = useField(name);
 	
   return (
 	  <Field name={name} label={label}>
-		  <Input {...field} {...controlProps} />
+		  <Input {...field}   />
 	  </Field>
   );
 };

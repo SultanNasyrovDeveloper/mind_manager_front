@@ -1,42 +1,30 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useField } from 'formik';
-import styled from 'styled-components';
-import { Col, Row, Text, SizedComponent } from 'ui';
+import { Form, FormItemProps, ValidateStatus } from 'ui';
 
-export interface FieldProps extends SizedComponent {
+export interface FieldProps
+  extends Pick<FormItemProps, 'label' | 'children' | 'help' | 'hidden' > {
   name: string;
-  label?: string | ReactNode;
-  children?: ReactNode;
 }
 
-export interface FormFieldProps<ControlProps = unknown>
-  extends Omit<FieldProps, 'children'> {
-  controlProps?: ControlProps;
-}
-
-const FieldBox = styled(Row)`
-  margin-bottom: 16px;
-  
-  .field-label-box {
-    padding-bottom: 4px;
-  }
-`;
+export type FormFieldProps = Omit<FieldProps, 'children'>;
 
 
-const Field: FC<FieldProps> = ({ name, label, size, children }) => {
+const Field: FC<FieldProps> = ({ name, help, hidden, ...formItemProps }) => {
   const [, meta] = useField(name);
+  const validateStatus = useMemo<ValidateStatus>(() => {
+    if (meta.touched && meta.error) return 'error';
+    if (meta.touched && !meta.error) return 'success';
+    return '';
+  }, [meta]);
   return (
-    <FieldBox>
-      {label && <Col className="field-label-box" span={24}>{ label }</Col>}
-      <Col span={24}>{ children }</Col>
-      {
-        <Col span={24}>
-          <Text color="red" level={5}>
-            { (meta.touched && meta.error) ? meta.error : null }
-          </Text>
-        </Col>
-      }
-    </FieldBox>
+    <Form.Item
+      hidden={hidden}
+      hasFeedback={true}
+      {...formItemProps}
+      validateStatus={validateStatus}
+      help={meta.touched && meta.error ? meta.error : help}
+    />
   );
 };
 

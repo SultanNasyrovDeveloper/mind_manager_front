@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FormManager, FormManagerProps, Form } from 'lib/form';
+import Form, { FormProps } from 'lib/form';
 import InputField from 'lib/form/fields/InputField';
 // import TextField from 'lib/form/fields/TextField';
 // import YoutubeUrlInputField from 'lib/form/fields/YoutubeUrlInputField';
@@ -7,15 +7,13 @@ import { NodeMedia } from 'types/node';
 import SelectMediaTypeField from '../components/media/SelectMediaTypeField';
 
 export interface NodeMediaFormProps
-  extends Omit<FormManagerProps<Partial<NodeMedia>>, 'initialValues'> {
-    initialValues?: Partial<NodeMedia>;
-}
+  extends FormProps<Partial<NodeMedia>> {}
 
 const NodeMediaForm: FC<NodeMediaFormProps> = (
-  { formProps, initialValues = {}, ...rest}
+  { initialValues = {}, ...rest}
 ) => {
   return (
-    <FormManager initialValues={initialValues} {...rest}>
+    <Form initialValues={initialValues} {...rest}>
       {/*<Form layout="vertical" {...formProps}>*/}
       {/*  {({ values }) => (*/}
       {/*    <>*/}
@@ -32,7 +30,7 @@ const NodeMediaForm: FC<NodeMediaFormProps> = (
       {/*    </>*/}
       {/*  )}*/}
       {/*</Form>*/}
-    </FormManager>
+    </Form>
   );
 };
 

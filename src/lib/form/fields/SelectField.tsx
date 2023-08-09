@@ -1,20 +1,18 @@
 import React, { FC } from 'react';
-import { Select, SelectProps, SelectValue } from 'ui';
-import { FormFieldProps, useField } from '..';
-import Field from '../Field';
+import { Select, SelectProps } from 'ui';
+import Field, { useField, FormFieldProps } from '../Field';
 
-export interface SelectFieldProps<ValueType = SelectValue>
-  extends FormFieldProps<SelectProps<ValueType>> {}
+export interface SelectFieldProps
+  extends FormFieldProps, SelectProps {}
 
 const SelectField: FC<SelectFieldProps> = (
-  { name, controlProps, ...rest}
+  { name, label, ...controlProps}
 ) => {
-  
   const [field] = useField(name);
   
   return (
-    <Field name={name}>
-      <Select {...field} {...controlProps}  />
+    <Field name={name} label={label}>
+      <Select {...field} {...controlProps} />
     </Field>
   );
 };
