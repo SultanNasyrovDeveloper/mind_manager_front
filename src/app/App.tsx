@@ -16,7 +16,7 @@ const App: FC<AppProps> = ({...rest}) => {
   );
   const fetchMe = useUserStore(state => state.fetchMe);
   const fetchMyActiveLearningSession = useLearningSessionStore(
-    state => state.fetchActive
+    state => state.fetchMyActive
   );
   const sidebarItems = useMemo(() => [
     {
@@ -32,8 +32,10 @@ const App: FC<AppProps> = ({...rest}) => {
   ], [user]);
   
   useAsyncOnce(async () => {
+    console.log('App effect once');
+    debugger;
     if (!user) await fetchMe();
-    if (!activeLearningSession) await fetchMyActiveLearningSession()
+    if (!activeLearningSession) await fetchMyActiveLearningSession();
   });
   
   return (

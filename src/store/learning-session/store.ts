@@ -3,7 +3,6 @@ import { LearningSessionApiEndpoint } from 'api/endpoints/learningSession';
 import { Identifier } from 'types/core';
 import {
 	LearningSession,
-	StartLearningSessionData,
 	SubmitRepetitionData
 } from 'types/learningSession';
 import { notification } from 'ui';
@@ -13,8 +12,8 @@ import { EndpointObjectState } from'../types';
 export interface LearningSessionStoreState
 	extends EndpointObjectState<LearningSession> {
 	activeSession?: LearningSession;
-	fetchActive: () => Promise<LearningSession | undefined>,
-	start: (data: StartLearningSessionData) => Promise<LearningSession | undefined>,
+	fetchMyActive: () => Promise<LearningSession | undefined>,
+	start: (data: Partial<LearningSession>) => Promise<LearningSession | undefined>,
 	submitRepetition: (data: SubmitRepetitionData) => Promise<LearningSession | undefined>,
 	finish: (sessionId: Identifier) => Promise<void>;
 }
@@ -38,13 +37,16 @@ export const useLearningSessionStore =
 				});
 				return activeSession;
 			},
-			async start(data: StartLearningSessionData) {
+			async start(data: Partial<LearningSession>) {
 				const [newSession, error] = await client.start(data);
 				if (!error && newSession) set({ activeSession: newSession });
-				if (error) notification.error({
-					message: get().name,
-					description: 'Failed to start new learning session. ' + String(error)
-				});
+				if (error) {
+					if (error.response?.status === 409) return await get().fetchMyActive();
+					notification.error({
+						message: get().name,
+						description: 'Failed to start new learning session. ' + String(error)
+					});
+				}
 				return newSession;
 			},
 			async submitRepetition(data: SubmitRepetitionData) {

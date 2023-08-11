@@ -1,7 +1,6 @@
 import { Identifier } from 'types/core'
 import {
 	LearningSession,
-	StartLearningSessionData,
 	SubmitRepetitionData
 } from 'types/learningSession'
 import {
@@ -20,7 +19,7 @@ export class LearningSessionApiEndpoint
 		return await this.client.get({ url: myActiveSessionUrl });
 	}
 	async start(
-		data: StartLearningSessionData
+		data: Partial<LearningSession>
 	): Promise<MethodResponse<LearningSession>> {
 		return await this.client.post<LearningSession>({
 			url: startLearningSessionUrl,

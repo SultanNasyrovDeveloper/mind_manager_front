@@ -17,6 +17,7 @@ export interface LearningSession {
 	user: number;
 	targets: number[];
 	current: number;
+	queue_generation_strategy: QueueGenerationStrategy;
 	start_datetime: string;
 	finish_datetime: string;
 	last_repetition_datetime: string;
@@ -31,11 +32,6 @@ export interface NodeLearningStatistics {
 	positive_repetitions_in_row: number;
 	easiness: string;
 	average_rate: string;
-}
-
-export interface StartLearningSessionData {
-	targets: number[];
-	queue_generation_strategy: QueueGenerationStrategy;
 }
 
 export interface SubmitRepetitionData {

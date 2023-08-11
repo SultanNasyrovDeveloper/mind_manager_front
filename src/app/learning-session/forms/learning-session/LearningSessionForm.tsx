@@ -1,29 +1,34 @@
 import React, { FC } from 'react';
 import Form, { FormProps } from 'lib/form';
-// import NodeSelectField from 'lib/form/fields/NodeSelectField';
+import NodeSelectField from 'lib/form/fields/NodeSelectField';
 import { LearningSession } from 'types/learningSession';
+import QueueGenerationStrategySelect
+	from '../../components/QueueGenerationStrategySelect';
 
 export interface LearningSessionFormProps
-	extends Omit<FormProps<Partial<LearningSession>>, 'initialValues'> {
-	initialValues?: Partial<LearningSession>;
+	extends FormProps<Partial<LearningSession>>{
 }
 
 const LearningSessionForm: FC<LearningSessionFormProps> = (
-	{ initialValues, ...formManagerProps }
+	{ initialValues, ...formProps }
 ) => {
   return (
     <Form
 	    initialValues={initialValues || {}}
-	    {...formManagerProps}
+	    {...formProps}
     >
-		    {/*<NodeSelectField*/}
-			  {/*  name="targets"*/}
-			  {/*  label="Targets"*/}
-			  {/*  controlProps={{*/}
-				{/*		mode: 'multiple',*/}
-				{/*		placeholder: 'Type node name here...'*/}
-				{/*	}}*/}
-		    {/*/>*/}
+	    <NodeSelectField
+		    allowClear
+		    name="targets"
+		    label="Targets"
+		    mode="multiple"
+		    placeholder="Type node name here..."
+	    />
+	    <QueueGenerationStrategySelect
+	      name="queue_generation_strategy"
+	      label="Queue generation strategy"
+	      defaultValue={2}
+	    />
     </Form>
   );
 };

@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
-import { FormManager, FormManagerProps } from 'lib/form';
+import Form, { FormProps } from 'lib/form';
 import { ChessBodyData } from 'types/node';
 import { TextEditor } from 'ui';
 
 export interface ChessBodyFormProps
-	extends FormManagerProps<ChessBodyData> {
+	extends FormProps<ChessBodyData> {
 }
 
 // export const StyledForm = styled(Form)`
@@ -18,12 +17,12 @@ const ChessBodyForm: FC<ChessBodyFormProps> = (
 	
 	
 	return (
-		<FormManager
+		<Form
 			enableReinitialize
 			{...rest}
 		>
 
-		</FormManager>
+		</Form>
 	);
 };
 

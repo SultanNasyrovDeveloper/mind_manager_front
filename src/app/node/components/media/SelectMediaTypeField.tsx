@@ -21,15 +21,12 @@ const MEDIA_TYPES: SelectItemProps[] = [
 ]
 
 const SelectMediaTypeField: FC<SelectMediaTypeFieldProps> = (
-	{ controlProps, ...rest }
+	{ ...rest }
 ) => {
   return (
     <SelectField
-	    controlProps={{
-				defaultValue: 'not_set',
-				options: MEDIA_TYPES,
-		    ...controlProps
-			}}
+	    defaultValue="not_set"
+	    options={MEDIA_TYPES}
 	    {...rest}
     />
   );

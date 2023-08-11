@@ -1,14 +1,24 @@
 import React, { FC } from 'react';
-import { FormFieldProps } from 'lib/form/types';
+import { SelectItemProps } from 'ui';
+import SelectField, { SelectFieldProps } from 'lib/form/fields/SelectField';
 
 export interface QueueGenerationStrategySelectProps
-	extends FormFieldProps {}
+	extends SelectFieldProps<number> {}
+
+const QUEUE_GENERATION_STRATEGY_OPTIONS: SelectItemProps[] = [
+	{ key: 'random', label: 'Random', value: 1 },
+	{ key: 'outdated', label: 'Outdated First', value: 2 },
+];
 
 const QueueGenerationStrategySelect: FC<QueueGenerationStrategySelectProps> = (
-	{ ...rest }
+	{ name, ...fieldProps }
 ) => {
   return (
-    <div></div>
+		<SelectField
+			name={name}
+			options={QUEUE_GENERATION_STRATEGY_OPTIONS}
+			{...fieldProps}
+		/>
   );
 };
 

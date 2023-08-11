@@ -2,17 +2,21 @@ import React, { FC } from 'react';
 import { Select, SelectProps } from 'ui';
 import Field, { useField, FormFieldProps } from '../Field';
 
-export interface SelectFieldProps
-  extends FormFieldProps, SelectProps {}
+export interface SelectFieldProps<Value = any>
+  extends FormFieldProps, SelectProps<Value> {}
 
 const SelectField: FC<SelectFieldProps> = (
-  { name, label, ...controlProps}
+  { name, label, hidden, ...controlProps}
 ) => {
-  const [field] = useField(name);
-  
+  const [field, , helpers] = useField(name);
   return (
-    <Field name={name} label={label}>
-      <Select {...field} {...controlProps} />
+    <Field hidden={hidden} name={name} label={label}>
+      <Select
+        value={field.value}
+        onBlur={field.onBlur}
+        onChange={(newValue) => helpers.setValue(newValue)}
+        {...controlProps}
+      />
     </Field>
   );
 };
