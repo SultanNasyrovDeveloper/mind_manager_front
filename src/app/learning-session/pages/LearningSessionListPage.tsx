@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import PageHeader from 'lib/components/PageHeader';
-import { Card, Col, Row } from 'ui';
+import { Col, Row } from 'ui';
 import LearningSessionTable
 	from '../components/learning-session-table/LearningSessionTable';
 

@@ -1,4 +1,4 @@
-import React, { FC, Ref, useRef, useMemo } from 'react';
+import React, { FC, useRef, useMemo } from 'react';
 import ReactQuill from 'react-quill';
 import styled from 'styled-components';
 import { ToolbarPresetName } from './types';

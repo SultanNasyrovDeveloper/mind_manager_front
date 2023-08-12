@@ -18,7 +18,6 @@ const LearningSessionTable: FC<LearningSessionTableProps> = (
 	const { onChange, ...pagination } = useLearningSessionStore(getPaginationConfig);
 	const sessions = useLearningSessionStore(state => state.list);
 	const fetchSessions = useLearningSessionStore(state => state.fetchList);
-	
 	useAsyncOnce(async () => await fetchSessions());
 	
   return (

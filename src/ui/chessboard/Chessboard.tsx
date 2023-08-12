@@ -4,7 +4,6 @@ import {
   default as BaseChessboard,
   Props as BaseChessboardProps
 } from 'chessboardjsx';
-import rough from 'roughjs'
 import { Move, Fen, Square } from './types';
 import { getPieceAsObject } from './utils';
 

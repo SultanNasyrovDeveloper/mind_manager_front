@@ -13,7 +13,6 @@ export interface NodeFormProps
 }
 
 const validationSchema = yup.object().shape({
-	owner: yup.number().required().min(1),
 	parent: yup.number().required().min(1),
 	name: yup.string().min(3).required(),
 	description: yup.string().optional(),
@@ -33,11 +32,10 @@ const NodeForm: FC<NodeFormProps> = (
 	    validationSchema={validationSchema}
 	    {...formProps}
     >
-	    <NumberField hidden name="owner" />
 	    <NumberField hidden name="parent" />
-	    <InputField name="name" label="Name" />
-	    <NodeBodyTypeSelectField name="type" label="Type" />
-	    <TextField name="description" label="Description" />
+	    <InputField required name="name" label="Name" />
+	    <NodeBodyTypeSelectField name="body.type" label="Type" />
+	    <TextField required={false} name="description" label="Description" />
     </Form>
   );
 };

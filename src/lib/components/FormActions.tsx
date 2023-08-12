@@ -10,7 +10,7 @@ export interface FormActionsProps {
 }
 
 const FormActions: FC<FormActionsProps> = ({
-	loading = false,
+	loading,
 	onCancel,
 	onClear,
 	onSave

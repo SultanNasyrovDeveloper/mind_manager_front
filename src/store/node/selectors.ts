@@ -43,7 +43,8 @@ export const getFetchNodeMedia = (
 ): (nodeId: number) => Promise<NodeMedia[] | undefined> => {
 	return async (nodeId: number) => {
 		const queryParams = { node: nodeId };
-		const [results] =  await state.fetchList(queryParams);
-		return results;
+		const [paginatedResult, error] =  await state.fetchList(queryParams);
+		if (!error && paginatedResult) return paginatedResult.results;
+		return undefined;
 	};
 }

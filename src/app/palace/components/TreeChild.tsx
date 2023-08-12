@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import LearningStatistics from 'app/node/components/LearningStatistics';
 import { TreeNode } from 'types/palace';
 import { Card, Link, Text } from 'ui';
 import NodeList from './NodeList';

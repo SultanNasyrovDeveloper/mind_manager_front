@@ -1,11 +1,11 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC, useCallback, useState, useRef } from 'react';
 import NodeForm from 'app/node/forms/NodeForm';
 import FormActions from 'lib/components/FormActions';
 import { FormRef } from 'lib/form';
 import useOpen from 'lib/hooks/useOpen';
+import { useNodeStore } from 'store/node';
 import { TreeNode } from 'types/palace';
 import { PalaceNode } from 'types/node';
-import { useUserStore } from 'store/user';
 import {
   Button,
   ButtonType,
@@ -16,12 +16,12 @@ import {
   Space,
 } from 'ui';
 import {
-  CaretUpOutlined,
-  FormOutlined,
   BarsOutlined,
-  SisternodeOutlined,
+  CaretUpOutlined,
   DeleteOutlined,
   EditOutlined,
+  FormOutlined,
+  SisternodeOutlined,
   VerticalAlignBottomOutlined
 } from 'ui/icons';
 
@@ -39,21 +39,28 @@ const NodeActions: FC<NodeActionsProps> = ({
   withCreateSubnode = true,
   buttonType = 'text',
 }) => {
-  
   const createNodeFormRef = useRef<FormRef<Partial<PalaceNode>>>(null)
   const [createNodeParent, setCreateNodeParent] = useState<number | undefined>();
   const [isDrawerOpen, setIsDrawerOpen] = useOpen();
-  const userId = useUserStore(state => state.currentUser?.id);
+  const createNode = useNodeStore(state => state.create);
+  console.log(createNodeFormRef.current?.errors);
   
-  const openCreateNodeDrawer = () => {
+  const openCreateNodeDrawer = useCallback(() => {
     setCreateNodeParent(node.id);
     setIsDrawerOpen(true);
-  };
+  }, [node, setCreateNodeParent, setIsDrawerOpen]);
   
-  const closeCreateNodeDrawer = () => {
+  const closeCreateNodeDrawer = useCallback(() => {
     setCreateNodeParent(undefined);
     setIsDrawerOpen(false);
-  };
+  }, [setCreateNodeParent, setIsDrawerOpen]);
+  
+  const handleCreateNodeFormSubmit = useCallback(
+    async (data: Partial<PalaceNode>) => {
+      console.log(data);
+      const [newNode, error] = await createNode(data);
+      if (!error && newNode) closeCreateNodeDrawer();
+    }, [createNode, closeCreateNodeDrawer]);
   
   return (
     <Space size="small">
@@ -119,19 +126,24 @@ const NodeActions: FC<NodeActionsProps> = ({
         onClose={closeCreateNodeDrawer}
         extra={
           <FormActions
-            onClear={() => createNodeFormRef.current?.resetForm()}
-            onSave={() => createNodeFormRef.current?.submitForm()}
             onCancel={closeCreateNodeDrawer}
+            onClear={() => createNodeFormRef.current?.resetForm()}
+            onSave={() => {
+              createNodeFormRef.current?.submitForm();
+              console.log(createNodeFormRef.current?.values);
+              console.log(createNodeFormRef.current?.errors);
+            }}
           />
         }
       >
         <NodeForm
           enableReinitialize
+          validateOnMount
           validateOnBlur
           innerRef={createNodeFormRef}
-          initialValues={{ parent: createNodeParent, owner: userId }}
+          initialValues={{ parent: createNodeParent }}
           innerFormProps={{ layout: 'vertical' }}
-          onSubmit={(data) => console.log(data)}
+          onSubmit={handleCreateNodeFormSubmit}
         />
       </Drawer>
     </Space>

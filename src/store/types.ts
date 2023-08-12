@@ -1,4 +1,5 @@
-import { QueryParams } from 'types/api';
+import { MethodResponse } from 'api/types';
+import { QueryParams, PaginatedResult } from 'types/api';
 import { Identifier } from 'types/core';
 
 export interface EndpointObjectState<ApiEndpointObject = { id: number }> {
@@ -23,16 +24,16 @@ export interface EndpointObjectState<ApiEndpointObject = { id: number }> {
 	
 	create: (
 		data: Partial<ApiEndpointObject>
-	) => Promise<ApiEndpointObject | undefined>;
+	) => Promise<MethodResponse<ApiEndpointObject>>;
 	fetchDetail: (
 		id: Identifier
-	) => Promise<ApiEndpointObject | undefined>;
+	) => Promise<MethodResponse<ApiEndpointObject>>;
 	fetchList: (
 		query?: QueryParams,
-	) => Promise<[ApiEndpointObject[], number]>;
+	) => Promise<MethodResponse<PaginatedResult<ApiEndpointObject>>>;
 	update: (
 		id: Identifier,
 		data: Partial<ApiEndpointObject>
-	) => Promise<ApiEndpointObject | undefined>;
-	delete: (id: Identifier) => Promise<void>;
+	) => Promise<MethodResponse<ApiEndpointObject>>;
+	delete: (id: Identifier) => Promise<MethodResponse<undefined>>;
 }

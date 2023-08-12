@@ -4,7 +4,6 @@ import InputField from 'lib/form/fields/InputField';
 // import TextField from 'lib/form/fields/TextField';
 // import YoutubeUrlInputField from 'lib/form/fields/YoutubeUrlInputField';
 import { NodeMedia } from 'types/node';
-import SelectMediaTypeField from '../components/media/SelectMediaTypeField';
 
 export interface NodeMediaFormProps
   extends FormProps<Partial<NodeMedia>> {}

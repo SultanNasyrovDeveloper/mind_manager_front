@@ -49,13 +49,13 @@ export const createApiEndpointStore = <
 		updateQueryParams(query: QueryParams) {
 			set({ query });
 		},
-		async create(data) {
+		async create(data: ApiEndpointObject) {
 			const [created, error] = await apiClient.create(data);
 			if (error) notification.error({
 				message: get().name,
 				description: 'Failed to create item. ' + String(error)
 			});
-			if (!error) return created;
+			return [created, error];
 		},
 		async fetchDetail(id) {
 			set({ isDetailLoading: true });
@@ -68,7 +68,7 @@ export const createApiEndpointStore = <
 				message: get().name,
 				description: 'Failed to fetch item. ' + String(error)
 			})
-			return detail;
+			return [detail, error];
 		},
 		async fetchList(additionalQuery = {}) {
 			set({ isListLoading: true });
@@ -91,11 +91,7 @@ export const createApiEndpointStore = <
 					description: 'Failed to load items from the server. ' + String(error)
 				});
 			}
-			return (
-				paginatedResult
-					?[paginatedResult.results, paginatedResult.count]
-					: [[], 0]
-			);
+			return [paginatedResult, error];
 		},
 		async update(id, data) {
 			const detailId = get().detail?.id;
@@ -111,14 +107,15 @@ export const createApiEndpointStore = <
 				description: 'Failed to update item. ' + String(error)
 			})
 			// Todo: possibly check if this item in the list
-			return updated;
+			return [updated, error];
 		},
 		async delete(id: Identifier) {
 			const [, error] = await apiClient.delete(id);
 			if (error) notification.error({
 				message: get().name,
 				description: 'Failed to delete item. ' + String(error)
-			})
+			});
+			return [undefined, error];
 		},
 		// @ts-ignore
 		...callback(apiClient, set, get)
