@@ -22,12 +22,18 @@ export type {
 	PaginationProps,
 	SelectProps,
 	SpaceProps,
+	TableProps,
+	TablePaginationConfig,
+	TableColumnType,
+	TableColumnsType,
+	TableColumnProps,
 	TagProps,
 	TooltipProps,
 } from 'antd';
 export type {
 	LanguageName as CodeLanguageName
 } from '@uiw/codemirror-extensions-langs';
+export type { ColumnType } from 'antd/lib/table/interface';
 
 export interface MenuInfo {
 	key: string;

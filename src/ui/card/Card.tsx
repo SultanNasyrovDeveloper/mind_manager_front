@@ -6,6 +6,7 @@ import { Row, Col, Divider } from '..';
 export interface CardProps extends BaseCardProps {
 	subtitle?: string | ReactNode;
 	noBodyPadding?: boolean;
+	footer?: string | ReactNode;
 }
 
 const StyledCard = styled<FC<CardProps>>(BaseCard)`
@@ -35,35 +36,43 @@ const Card: FC<CardProps> = (
 	{
 		title,
 		subtitle,
+		footer,
 		extra,
 		children,
+		headStyle,
 		bodyStyle,
+		noBodyPadding,
 		...rest
 	}
 ) => {
 	return (
-		<StyledCard {...rest}>
-			<Row className="card-header">
-				<Col span={18}>
-					{title}
-				</Col>
-				<Col span={6} className="card-extra-container">
-					{extra}
-				</Col>
-			</Row>
-			<Divider className="card-header-divider" />
+		<StyledCard noBodyPadding={noBodyPadding} {...rest}>
+			{(title || extra) &&
+          <Row className="card-header" style={headStyle}>
+              <Col span={18}>
+								{title}
+              </Col>
+              <Col span={6} className="card-extra-container">
+								{extra}
+              </Col>
+          </Row>
+			}
 			{subtitle &&
-        <Row className="card-subtitle-container">
-          <Col span={24}>
-	          {subtitle}
-					</Col>
-				</Row>
+					<>
+              <Divider className="card-header-divider" />
+              <Row className="card-subtitle-container">
+                  <Col span={24}>
+										{subtitle}
+                  </Col>
+              </Row>
+					</>
 			}
 			{children &&
         <div className="card-body" style={bodyStyle}>
 	        {children}
 				</div>
 			}
+			{footer && <Row><Col span={24}>{ footer }</Col></Row>}
 		</StyledCard>
 	);
 }

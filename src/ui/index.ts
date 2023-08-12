@@ -17,6 +17,7 @@ export {
 	Select,
 	Space,
 	Spin,
+	Table,
 	Tag,
 	Tooltip,
 	Input,

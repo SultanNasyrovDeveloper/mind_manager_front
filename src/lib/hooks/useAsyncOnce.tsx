@@ -1,6 +1,6 @@
 import useAsync from './useAsync';
 
-const useAsyncOnce = (asyncFunction: () => Promise<void>) =>
+const useAsyncOnce = (asyncFunction: () => any | Promise<any>) =>
 	useAsync(asyncFunction, []);
 
 export default useAsyncOnce;

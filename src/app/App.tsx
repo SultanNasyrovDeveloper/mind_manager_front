@@ -5,7 +5,11 @@ import useAsyncOnce from 'lib/hooks/useAsyncOnce';
 import { useLearningSessionStore } from 'store/learning-session';
 import { useUserStore } from 'store/user';
 import { AppLayout, Row, SidebarMenu } from 'ui';
-import { AppstoreOutlined, ApartmentOutlined } from 'ui/icons';
+import {
+  ApartmentOutlined,
+  AppstoreOutlined,
+  FileSyncOutlined
+} from 'ui/icons';
 
 export interface AppProps { }
 
@@ -28,12 +32,15 @@ const App: FC<AppProps> = ({...rest}) => {
       key: 'palace',
       icon: <ApartmentOutlined />,
       to: `/palace/${user ? user.mind_palace : ''}`
-    }
+    },
+    {
+      key: 'learning/sessions',
+      icon: <FileSyncOutlined />,
+      to: '/learning/sessions'
+    },
   ], [user]);
   
   useAsyncOnce(async () => {
-    console.log('App effect once');
-    debugger;
     if (!user) await fetchMe();
     if (!activeLearningSession) await fetchMyActiveLearningSession();
   });

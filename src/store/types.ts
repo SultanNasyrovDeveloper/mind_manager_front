@@ -8,14 +8,28 @@ export interface EndpointObjectState<ApiEndpointObject = { id: number }> {
 	isDetailUpdating: boolean;
 	isDetailLoading: boolean;
 	isListLoading: boolean;
+	page: number;
+	pageSize: number;
+	total: number;
 	query: QueryParams;
 	
 	get id(): number | undefined;
 	setDetail: (newDetail: ApiEndpointObject) => void;
+	setQueryParams: (query: QueryParams) => void;
+	updateQueryParams: (query: QueryParams) => void;
+	setPage: (page: number) => void;
+	setPageSize: (pageSize: number) => void;
+	setTotal: (total: number) => void;
 	
-	create: (data: Partial<ApiEndpointObject>) => Promise<ApiEndpointObject | undefined>;
-	fetchDetail: (id: Identifier) => Promise<ApiEndpointObject | undefined>;
-	fetchList: (query: QueryParams) => Promise<[ApiEndpointObject[], number]>;
+	create: (
+		data: Partial<ApiEndpointObject>
+	) => Promise<ApiEndpointObject | undefined>;
+	fetchDetail: (
+		id: Identifier
+	) => Promise<ApiEndpointObject | undefined>;
+	fetchList: (
+		query?: QueryParams,
+	) => Promise<[ApiEndpointObject[], number]>;
 	update: (
 		id: Identifier,
 		data: Partial<ApiEndpointObject>

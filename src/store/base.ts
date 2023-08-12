@@ -4,6 +4,7 @@ import ApiEndpointClient from 'api/v2/endpoints/base';
 import { Identifier } from 'types/core';
 import { notification } from 'ui';
 import { EndpointObjectState } from './types';
+import {QueryParams} from "../types";
 
 export const createApiEndpointStore = <
 	ApiEndpointObject extends { id: number },
@@ -23,12 +24,30 @@ export const createApiEndpointStore = <
 		isDetailLoading: false,
 		isDetailUpdating: false,
 		isListLoading: false,
+		page: 1,
+		pageSize: 15,
+		total: 0,
 		query: {},
 		get id() {
 			return get().detail?.id;
 		},
 		setDetail(newDetail: ApiEndpointObject) {
 			set({detail: newDetail});
+		},
+		setPage(page: number) {
+			set({ page });
+		},
+		setPageSize(pageSize: number) {
+			set({ pageSize });
+		},
+		setTotal(total: number) {
+			set({ total });
+		},
+		setQueryParams(query: QueryParams) {
+			set({ query });
+		},
+		updateQueryParams(query: QueryParams) {
+			set({ query });
 		},
 		async create(data) {
 			const [created, error] = await apiClient.create(data);
@@ -51,17 +70,20 @@ export const createApiEndpointStore = <
 			})
 			return detail;
 		},
-		async fetchList(additionalQuery) {
+		async fetchList(additionalQuery = {}) {
 			set({ isListLoading: true });
 			const storeQuery = get().query;
 			const combinedQuery = {
 				...storeQuery,
-				...additionalQuery
+				...additionalQuery,
+				limit: get().page,
+				offset: (get().page - 1) * get().pageSize
 			};
 			const [paginatedResult, error] = await apiClient.list(combinedQuery);
 			set({
 				isListLoading: false,
-				list: paginatedResult ? paginatedResult.results: []
+				list: paginatedResult.results,
+				total: paginatedResult.count
 			});
 			if (error) {
 				notification.error({
