@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { Select, SelectProps } from 'ui';
 import Field, { useField, FormFieldProps } from '../Field';
 
@@ -11,11 +11,16 @@ const SelectField: FC<SelectFieldProps> = (
   const [field, , helpers] = useField(name);
   const { defaultValue, ...restControlProps} = controlProps;
   useEffect(() => {
-    if (defaultValue) helpers.setValue(defaultValue);
-  }, [defaultValue, helpers]);
+      defaultValue && helpers.setValue(defaultValue)
+    }, [defaultValue, helpers]);
   
   return (
-    <Field hidden={hidden} name={name} label={label} help={help}>
+    <Field
+      hidden={hidden}
+      name={name}
+      label={label}
+      help={help}
+    >
       <Select
         value={field.value}
         onBlur={field.onBlur}

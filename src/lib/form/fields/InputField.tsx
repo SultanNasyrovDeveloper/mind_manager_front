@@ -12,7 +12,7 @@ const InputField: FC<InputFieldProps> = (
 	
   return (
 	  <Field name={name} label={label}>
-		  <Input {...field}   />
+		  <Input {...field} />
 	  </Field>
   );
 };

@@ -14,7 +14,7 @@ export interface NodeFormProps
 
 const validationSchema = yup.object().shape({
 	parent: yup.number().required().min(1),
-	name: yup.string().min(3).required(),
+	name: yup.string().min(2).required(),
 	description: yup.string().optional(),
 	body: yup.object().nullable().optional().shape({
 		type: yup.string().required().oneOf(

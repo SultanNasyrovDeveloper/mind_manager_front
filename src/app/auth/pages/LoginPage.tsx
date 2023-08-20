@@ -1,6 +1,6 @@
 import React, { FC, useRef, useCallback, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FormRef } from 'lib/form';
+import { FormManagerProps } from 'lib/form';
 import FormActions from 'lib/components/FormActions';
 import { useUserStore, getIsCurrentUserAuthenticated } from 'store/user';
 import { LoginCredentials } from 'types/auth';
@@ -10,7 +10,7 @@ import LoginForm from '../forms/LoginForm';
 const LoginPage: FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const loginFormRef = useRef<FormRef<LoginCredentials>>(null);
+  const loginFormRef = useRef<FormManagerProps<LoginCredentials>>(null);
   const isAuthenticated = useUserStore(getIsCurrentUserAuthenticated);
   const fetchAuthTokens = useUserStore(state => state.fetchAuthTokens);
   const fetchMe = useUserStore(state => state.fetchMe);

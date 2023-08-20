@@ -1,11 +1,12 @@
-import React, { FC, useCallback, useState, useRef } from 'react';
+import React, { FC, useCallback, useRef, useState } from 'react';
 import NodeForm from 'app/node/forms/NodeForm';
 import FormActions from 'lib/components/FormActions';
-import { FormRef } from 'lib/form';
+import { FormManagerProps } from 'lib/form';
 import useOpen from 'lib/hooks/useOpen';
 import { useNodeStore } from 'store/node';
-import { TreeNode } from 'types/palace';
+import { usePalaceStore } from 'store/palace';
 import { PalaceNode } from 'types/node';
+import { TreeNode } from 'types/palace';
 import {
   Button,
   ButtonType,
@@ -39,11 +40,14 @@ const NodeActions: FC<NodeActionsProps> = ({
   withCreateSubnode = true,
   buttonType = 'text',
 }) => {
-  const createNodeFormRef = useRef<FormRef<Partial<PalaceNode>>>(null)
+  const createNodeFormRef =
+    useRef<FormManagerProps<Partial<PalaceNode>>>(null);
   const [createNodeParent, setCreateNodeParent] = useState<number | undefined>();
   const [isDrawerOpen, setIsDrawerOpen] = useOpen();
   const createNode = useNodeStore(state => state.create);
-  console.log(createNodeFormRef.current?.errors);
+  const deleteNode = useNodeStore(state => state.delete);
+  const addNodeToTree = usePalaceStore(state => state.addNode);
+  const removeNodeFromTree = usePalaceStore(state => state.removeNode);
   
   const openCreateNodeDrawer = useCallback(() => {
     setCreateNodeParent(node.id);
@@ -57,10 +61,17 @@ const NodeActions: FC<NodeActionsProps> = ({
   
   const handleCreateNodeFormSubmit = useCallback(
     async (data: Partial<PalaceNode>) => {
-      console.log(data);
       const [newNode, error] = await createNode(data);
-      if (!error && newNode) closeCreateNodeDrawer();
-    }, [createNode, closeCreateNodeDrawer]);
+      if (!error && newNode) {
+        closeCreateNodeDrawer();
+        addNodeToTree(newNode);
+      }
+    }, [createNode, addNodeToTree, closeCreateNodeDrawer]);
+  
+  const handleNodeDelete = useCallback(async () => {
+    if (node) await deleteNode(node.id);
+    removeNodeFromTree(node);
+  }, [node, deleteNode, removeNodeFromTree]);
   
   return (
     <Space size="small">
@@ -107,8 +118,8 @@ const NodeActions: FC<NodeActionsProps> = ({
             {
               key: 'delete',
               label: 'Delete',
-              icon: <DeleteOutlined />
-              
+              icon: <DeleteOutlined />,
+              onClick: handleNodeDelete
             },
           ]
         }}
@@ -128,11 +139,7 @@ const NodeActions: FC<NodeActionsProps> = ({
           <FormActions
             onCancel={closeCreateNodeDrawer}
             onClear={() => createNodeFormRef.current?.resetForm()}
-            onSave={() => {
-              createNodeFormRef.current?.submitForm();
-              console.log(createNodeFormRef.current?.values);
-              console.log(createNodeFormRef.current?.errors);
-            }}
+            onSave={() => createNodeFormRef.current?.submitForm()}
           />
         }
       >

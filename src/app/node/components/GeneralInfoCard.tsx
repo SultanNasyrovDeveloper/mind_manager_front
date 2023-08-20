@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { Row, Col, Card, Typography } from 'antd';
-import { ClusterOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { PalaceNode } from 'types';
+import { Card, Row, Space, Typography } from 'ui';
+import { ClusterOutlined, SettingOutlined } from 'ui/icons';
 import LearningStatistics from './LearningStatistics';
 
 export interface GeneralInfoCardProps {
@@ -27,31 +27,25 @@ const GeneralInfoCard: FC<GeneralInfoCardProps> = (props) => {
   return (
     <GeneralInfoCardStyled
       title={
-      <>
-        <Row>
-          <Col span={20}>
-            <PointerText
-              editable={{
-                triggerType: ['text'],
-                onChange: (value) =>
-                  value !== node.name
-                    ? onUpdate({ name: value })
-                    : null
-              }}
-            >
-              { node?.name }
-            </PointerText>
-          </Col>
-          <Col span={4}>
-            <Row justify="end">
-              {/*@ts-ignore*/}
-              <ClusterOutlined
-                onClick={() => onNodePalaceClick(node)}
-              />
-            </Row>
-          </Col>
-        </Row>
-      </>
+        <PointerText
+          editable={{
+            triggerType: ['text'],
+            onChange: (value) =>
+              value !== node.name
+                ? onUpdate({ name: value })
+                : null
+        }}
+        >
+          { node?.name }
+        </PointerText>
+      }
+      extra={
+        <Space>
+          <ClusterOutlined
+            onClick={() => onNodePalaceClick(node)}
+          />
+          <SettingOutlined />
+        </Space>
       }
     >
       <Row>

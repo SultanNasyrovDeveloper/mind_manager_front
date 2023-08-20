@@ -14,5 +14,5 @@ export const useNodeBodyStore = createApiEndpointStore<NodeBody>(
 
 export const useNodeMediaStore = createApiEndpointStore<NodeMedia>(
 	'Node Media',
-	apiClient.media
+	apiClient.nodeMedia
 );

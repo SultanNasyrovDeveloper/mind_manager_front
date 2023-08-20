@@ -37,6 +37,8 @@ const CodeView: FC<NodeViewProps> = ({ onNodeSubtree}) => {
 		[bodyEditorContent]
 	);
 	
+	console.log(editorContent);
+	
 	return (
 		<>
 			{!body && <Preloader />}
@@ -63,9 +65,9 @@ const CodeView: FC<NodeViewProps> = ({ onNodeSubtree}) => {
 							<CodeEditor
 								content={editorContent}
 								height="75vh"
-								onChange={setEditorContent}
 								// @ts-ignore
 								extensions={extensions || []}
+								onChange={setEditorContent}
 							/>
 						</Card>
 					}

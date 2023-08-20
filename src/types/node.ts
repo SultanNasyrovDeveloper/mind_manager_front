@@ -26,11 +26,16 @@ export interface NodeBody {
   };
 }
 
+export enum NodeMediaType {
+  notSet = 1,
+  youtube = 2
+}
+
 export interface NodeMedia {
   id: Identifier;
   title: string;
   description: string;
-  type: string;
+  type: NodeMediaType;
   node: Identifier;
   config: Record<string, unknown>
 }

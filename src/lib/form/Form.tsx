@@ -1,11 +1,10 @@
-import React, { FC, ReactNode } from 'react';
-import { Formik, FormikConfig } from 'formik';
+import React, { FC, useCallback } from 'react';
+import { Formik, FormikConfig, FormikProps as FormManagerProps } from 'formik';
 import { Form as UIForm, FormProps as UIFormProps } from 'ui';
 
 export interface FormProps<DataType = any>
-  extends Omit<FormikConfig<DataType>, 'children'|  'initialValues'>  {
+  extends Omit<FormikConfig<DataType>, 'initialValues'>  {
   innerFormProps?: UIFormProps;
-  children?: ReactNode;
   initialValues?: DataType;
 }
 
@@ -17,11 +16,22 @@ const Form: FC<FormProps> = (
     ...formikProps
   }
 ) => {
+  
+  const makeFormChildren = useCallback((props: FormManagerProps<any>) => {
+    if (typeof children === 'function') return children(props);
+    return children;
+  }, [children]);
+  
   return (
-    <Formik initialValues={initialValues || {}} {...formikProps}>
-      <UIForm {...innerFormProps}>{ children }</UIForm>
-    </Formik>
+    <Formik
+      initialValues={initialValues || {}}
+      {...formikProps}
+      children={(props) => (
+        <UIForm {...innerFormProps}>{ makeFormChildren(props) }</UIForm>
+      )}
+    />
   );
 };
 
 export default Form;
+export type { FormManagerProps };

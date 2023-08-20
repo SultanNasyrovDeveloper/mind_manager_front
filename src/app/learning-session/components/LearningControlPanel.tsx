@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useRef } from 'react';
 import FormActions from 'lib/components/FormActions';
-import { FormRef } from 'lib/form';
+import { FormManagerProps } from 'lib/form';
 import useOpen from 'lib/hooks/useOpen';
 import { useLearningSessionStore } from 'store/learning-session';
 import { useNodeStore } from 'store/node';
@@ -13,7 +13,7 @@ export interface LearningControlPanelProps {}
 const LearningControlPanel: FC<LearningControlPanelProps> = (
 	{ ...rest }
 ) => {
-	const formRef = useRef<FormRef<Partial<LearningSession>>>(null);
+	const formRef = useRef<FormManagerProps<Partial<LearningSession>>>(null);
 	const nodeId = useNodeStore(state => state.detail?.id);
 	const [isOpen, , toggleIsOpen] = useOpen();
 	const activeSession = useLearningSessionStore(state => state.activeSession);

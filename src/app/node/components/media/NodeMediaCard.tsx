@@ -78,7 +78,11 @@ const NodeMediaCard: FC<NodeMediaCardProps> = (
         open={isOpen}
         onClose={toggleIsOpen}
       >
-        <NodeMediaForm onSubmit={(data) => console.log(data)} />
+        <NodeMediaForm
+          innerFormProps={{ layout: 'vertical' }}
+          initialValues={{ type: 1 }}
+          onSubmit={(data) => console.log(data)}
+        />
       </Drawer>
     </Card>
   );

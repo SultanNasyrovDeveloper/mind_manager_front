@@ -18,15 +18,15 @@ export interface ApiClientConfig
 }
 
 export class ApiClient {
+	readonly auth: AuthClient;
 	readonly baseUrl: Url
 	readonly client: AxiosInstance;
-	readonly auth: AuthClient;
 	readonly palaces: PalaceApiClient;
 	readonly nodes: NodeApiEndpoint;
 	readonly bodies: NodeBodyApiEndpoint;
+	readonly nodeMedia: NodeMediaApiEndpoint;
 	readonly learningSessions: LearningSessionApiEndpoint;
 	readonly users: UserApiClient;
-	readonly media: NodeMediaApiEndpoint;
 	
 	constructor({ baseUrl, ...rest }: ApiClientConfig) {
 		this.baseUrl = baseUrl;
@@ -35,7 +35,7 @@ export class ApiClient {
 		this.palaces = new PalaceApiClient('palace/palaces/', this);
 		this.nodes = new NodeApiEndpoint('node/nodes/', this);
 		this.bodies = new NodeBodyApiEndpoint('node/bodies/', this);
-		this.media = new NodeMediaApiEndpoint('node/media/', this);
+		this.nodeMedia = new NodeMediaApiEndpoint('node/media/', this);
 		this.learningSessions = new LearningSessionApiEndpoint(
 			'learning/sessions/',
 			this

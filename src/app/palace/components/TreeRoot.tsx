@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-
 import LearningStatistics from 'app/node/components/LearningStatistics';
 import BackButton from 'lib/components/BackButton';
 import { TreeNode } from 'types/palace';
@@ -19,11 +18,13 @@ const TreeRoot: FC<TreeRootProps> = (
         <Space>
           <BackButton />
           <Text isPointable level={2}>{ node.name }</Text>
+          <div>
+            <LearningStatistics statistics={node.statistics} />
+          </div>
         </Space>
       }
       extra={
         <Space>
-          <LearningStatistics statistics={node.statistics} />
           <RootActions buttonType="default" node={node} />
         </Space>
       }

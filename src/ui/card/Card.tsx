@@ -48,24 +48,20 @@ const Card: FC<CardProps> = (
 	return (
 		<StyledCard noBodyPadding={noBodyPadding} {...rest}>
 			{(title || extra) &&
-          <Row className="card-header" style={headStyle}>
-              <Col span={18}>
-								{title}
-              </Col>
-              <Col span={6} className="card-extra-container">
-								{extra}
-              </Col>
-          </Row>
+        <Row className="card-header" style={headStyle}>
+		      <Col span={18}>{title}</Col>
+		      <Col span={6} className="card-extra-container">
+			      {extra}
+					</Col>
+				</Row>
 			}
 			{subtitle &&
-					<>
-              <Divider className="card-header-divider" />
-              <Row className="card-subtitle-container">
-                  <Col span={24}>
-										{subtitle}
-                  </Col>
-              </Row>
-					</>
+				<>
+          <Divider className="card-header-divider" />
+          <Row className="card-subtitle-container">
+		        <Col span={24}>{subtitle}</Col>
+					</Row>
+				</>
 			}
 			{children &&
         <div className="card-body" style={bodyStyle}>
