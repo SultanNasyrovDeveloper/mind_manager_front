@@ -17,13 +17,13 @@ const StyledCard = styled<FC<CardProps>>(BaseCard)`
 		margin: 0;
 	}
 	.card-subtitle-container {
-		padding: 8px 16px;
+		padding: 16px 4px 16px 8px;
 	}
 	.ant-card-body {
     padding: 0;
   }
 	.card-body {
-    padding: ${props => props.noBodyPadding ? 0 : '16px'};
+    padding: ${props => props.noBodyPadding ? 0 : '8px 16px'};
 	}
 	
 	.card-extra-container {

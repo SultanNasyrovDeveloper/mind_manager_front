@@ -7,6 +7,7 @@ import { useLearningSessionStore } from 'store/learning-session';
 import { useNodeStore } from 'store/node';
 import { LearningSession, RepetitionRating } from 'types/learningSession';
 import { Button, Drawer, Space } from 'ui';
+import { ExperimentFilled } from 'ui/icons'
 import LearningSessionForm from '../../forms/learning-session';
 import RateRepetitionButton from './RateRepetitionButton';
 
@@ -44,7 +45,11 @@ const LearningControlPanel: FC<LearningControlPanelProps> = (
   return (
 		<>
 			{!activeSession &&
-        <Button type="primary" onClick={toggleIsOpen}>Learn</Button>
+        <Button
+		        type="primary"
+		        icon={<ExperimentFilled />}
+		        onClick={toggleIsOpen}
+        >Study</Button>
 			}
 			{activeSession &&
 				<Space>
