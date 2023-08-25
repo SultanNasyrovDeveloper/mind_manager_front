@@ -11,7 +11,7 @@ import {
 	useNodeBodyStore,
 	getTextEditorContent
 } from 'store/node';
-import { PalaceNode } from 'types';
+import { PalaceNode } from 'types/node';
 import { TextEditor, Card } from 'ui';
 import GeneralInfoCard from '../../components/GeneralInfoCard';
 import BodyActions from '../../components/BodyActions';

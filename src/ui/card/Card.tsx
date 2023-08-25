@@ -30,6 +30,10 @@ const StyledCard = styled<FC<CardProps>>(BaseCard)`
 		display: flex;
 		justify-content: end;
 	}
+	
+	.card-footer-container {
+		padding: 16px;
+	}
 `;
 
 const Card: FC<CardProps> = (
@@ -68,7 +72,11 @@ const Card: FC<CardProps> = (
 	        {children}
 				</div>
 			}
-			{footer && <Row><Col span={24}>{ footer }</Col></Row>}
+			{footer &&
+				<Row>
+					<Col span={24} className="card-footer-container">{ footer }</Col>
+				</Row>
+			}
 		</StyledCard>
 	);
 }

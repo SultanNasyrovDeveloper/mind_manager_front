@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { NodeLearningStatistics } from 'types';
+import { NodeLearningStatistics } from 'types/learning';
 import { Space, Text, Size, Tag, Divider } from 'ui';
 import {
   EyeOutlined,

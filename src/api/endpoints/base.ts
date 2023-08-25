@@ -1,4 +1,5 @@
-import { PaginatedResult, QueryParams, Url, Identifier } from 'types';
+import { PaginatedResult, QueryParams, Url } from 'types/api';
+import { Identifier } from 'types/core';
 import { ApiClient } from '../client';
 import { RequestConfig, MethodResponse } from '../types';
 import { makeDetailUrl } from '../utils';

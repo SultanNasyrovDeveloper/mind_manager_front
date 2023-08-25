@@ -1,4 +1,4 @@
-import { PalaceStatistics } from 'types';
+import { PalaceStatistics } from 'types/palace';
 import { Identifier } from 'types/core';
 import { TreeNode } from 'types/palace';
 import ApiEndpointClient from './base';

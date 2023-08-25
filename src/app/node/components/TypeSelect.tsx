@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { NodeBodyType } from 'types';
+import { NodeBodyType } from 'types/node';
 import {
   Button,
   Dropdown,

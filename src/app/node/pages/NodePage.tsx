@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import BackButton from 'lib/components/BackButton';
 import LearningSessionControlPanel
-  from 'app/learning-session/components/LearningControlPanel';
+  from 'app/learning-session/components/learning-control-panel';
 import NodeBreadcrumbs from 'app/node/components/NodeBreadcrumbs';
 import Preloader from 'lib/components/Preloader';
 import useAsync from 'lib/hooks/useAsync';

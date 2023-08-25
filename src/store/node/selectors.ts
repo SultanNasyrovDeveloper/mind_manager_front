@@ -10,7 +10,7 @@ export const getNodeAncestors = (
 
 export const getNodeBodyType = (
 	state: EndpointObjectState<PalaceNode>
-): string => _.get(state, 'detail.body.type', '');
+): string => _.get(state, 'detail.body.type', 'text');
 
 export const getTextEditorContent = (
 	state: EndpointObjectState<NodeBody>

@@ -31,7 +31,7 @@ const App: FC<AppProps> = ({...rest}) => {
     {
       key: 'palace',
       icon: <ApartmentOutlined />,
-      to: `/palace/${user ? user.mind_palace : ''}`
+      to: user ? `/palace/${user.mind_palace}` : ''
     },
     {
       key: 'learning/sessions',

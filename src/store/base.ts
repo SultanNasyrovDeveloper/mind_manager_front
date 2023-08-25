@@ -1,10 +1,11 @@
 // @ts-nocheck
 import { create } from 'zustand';
 import ApiEndpointClient from 'api/v2/endpoints/base';
+import { QueryParams } from 'types/api';
 import { Identifier } from 'types/core';
 import { notification } from 'ui';
 import { EndpointObjectState } from './types';
-import {QueryParams} from "../types";
+
 
 export const createApiEndpointStore = <
 	ApiEndpointObject extends { id: number },

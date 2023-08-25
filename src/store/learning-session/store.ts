@@ -3,13 +3,13 @@ import { LearningSessionApiEndpoint } from 'api/endpoints/learningSession';
 import { Identifier } from 'types/core';
 import {
 	LearningSession,
-	SubmitRepetitionData
+	SubmitRepetitionData,
 } from 'types/learningSession';
 import { notification } from 'ui';
 import { createApiEndpointStore } from '../base';
 import { EndpointObjectState } from'../types';
 
-export interface LearningSessionStoreState
+export interface LearningSessionState
 	extends EndpointObjectState<LearningSession> {
 	activeSession?: LearningSession;
 	fetchMyActive: () => Promise<LearningSession | undefined>,
@@ -22,7 +22,7 @@ export const useLearningSessionStore =
 	createApiEndpointStore<
 		LearningSession,
 		LearningSessionApiEndpoint,
-		LearningSessionStoreState
+		LearningSessionState
 		>(
 			'Learning Session',
 		apiClient.learningSessions,
@@ -50,13 +50,12 @@ export const useLearningSessionStore =
 				return newSession;
 			},
 			async submitRepetition(data: SubmitRepetitionData) {
+				const activeSessionId = get().activeSession?.id;
+				if (!activeSessionId) return [undefined, undefined]
 				const [updatedSession, error] = await client.submitRepetition(
-					get().detail?.id as number,
-					data
+					activeSessionId, data
 				);
-				if (!error && updatedSession) set(
-					{ activeSession: updatedSession }
-				);
+				if (!error && updatedSession) set({ activeSession: updatedSession });
 				if (error) notification.error({
 					message: get().name,
 					description: 'Failed to submit repetition. ' + String(error)

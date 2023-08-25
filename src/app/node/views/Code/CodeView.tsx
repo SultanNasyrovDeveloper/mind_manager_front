@@ -8,7 +8,7 @@ import {
 	getCodeLanguage,
 	getCodeEditorContent
 } from 'store/node';
-import { PalaceNode } from 'types';
+import { PalaceNode } from 'types/node';
 import { Card, CodeEditor } from 'ui';
 import GeneralInfoCard from '../../components/GeneralInfoCard';
 import BodyActions from '../../components/BodyActions';

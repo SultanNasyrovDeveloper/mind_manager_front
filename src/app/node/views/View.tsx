@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Preloader from 'lib/components/Preloader';
 import useAsync from 'lib/hooks/useAsync';
 import { useNodeStore, useNodeBodyStore } from 'store/node';
-import { NodeBodyType } from 'types';
+import { NodeBodyType } from 'types/node';
 import { NodeViewProps } from '../types';
 import ChessView from './Chess/ChessView';
 import TranslationView from './Translation/TranslationView';

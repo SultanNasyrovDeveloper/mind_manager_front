@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Url } from 'types';
+import { Url } from 'types/api';
 import { API_HOST } from 'config';
 import { AuthClient } from './endpoints/auth';
 import { PalaceApiClient } from './endpoints/palace';

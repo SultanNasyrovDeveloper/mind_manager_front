@@ -9,7 +9,7 @@ export enum QueueGenerationStrategy {
 	outdatedFirst = 2
 }
 
-export type RepetitionRating = 1 | 2 | 3 | 4 | 5 | 6;
+export type RepetitionRating =  2 | 3 | 4 | 5 | 6;
 
 export interface LearningSession {
 	id: number;

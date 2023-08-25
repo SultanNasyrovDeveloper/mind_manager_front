@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { PalaceNode } from 'types';
+import { PalaceNode } from 'types/node';
 import { Card, Row, Space, Typography } from 'ui';
 import { ClusterOutlined, SettingOutlined } from 'ui/icons';
 import LearningStatistics from './LearningStatistics';

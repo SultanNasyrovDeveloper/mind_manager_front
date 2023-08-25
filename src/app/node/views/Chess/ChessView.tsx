@@ -6,7 +6,7 @@ import {
 	getBodyChessPosition,
 	getBodyChessOrientation
 } from 'store/node';
-import { PalaceNode } from 'types';
+import { PalaceNode } from 'types/node';
 import {
 	Card,
 	Collapse,
