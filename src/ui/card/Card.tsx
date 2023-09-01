@@ -17,7 +17,7 @@ const StyledCard = styled<FC<CardProps>>(BaseCard)`
 		margin: 0;
 	}
 	.card-subtitle-container {
-		padding: 16px 4px 16px 8px;
+		padding: 8px 16px;
 	}
 	.ant-card-body {
     padding: 0;

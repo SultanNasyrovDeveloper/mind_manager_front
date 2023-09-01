@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import TwoColumnLayout from 'lib/components/TwoColumnLayout';
 import { TextEditor, Card } from 'ui';
 import BodyActions from '../../components/BodyActions'
 import { NodeViewProps } from '../../types';
@@ -10,23 +9,18 @@ const TranslationView: FC<TranslationViewProps> = (
   { ...rest}
 ) => {
   return (
-    <TwoColumnLayout
-      first={
-        <Card
-          title="Translation"
-          extra={
-            <BodyActions
-              hasChanged={false}
-              onSave={() => {}}
-            />
-          }
-        >
-          <TextEditor />
-          <TextEditor />
-        </Card>
+    <Card
+      title="Translation"
+      extra={
+        <BodyActions
+          hasChanged={false}
+          onSave={() => {}}
+        />
       }
-      second="Detail"
-    />
+    >
+      <TextEditor />
+      <TextEditor />
+    </Card>
   );
 };
 

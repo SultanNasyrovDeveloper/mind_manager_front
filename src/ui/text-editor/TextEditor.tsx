@@ -30,6 +30,7 @@ const TextEditor: FC<TextEditorProps> = (
 	const editorModules = useMemo(() => {
 		return {
 			toolbar: getToolbarPreset(toolbarPreset),
+			clipboard: { matchVisual: false },
 			...modules
 		};
 	}, [modules, toolbarPreset]);

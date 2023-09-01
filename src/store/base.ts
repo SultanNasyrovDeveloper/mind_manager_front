@@ -6,7 +6,6 @@ import { Identifier } from 'types/core';
 import { notification } from 'ui';
 import { EndpointObjectState } from './types';
 
-
 export const createApiEndpointStore = <
 	ApiEndpointObject extends { id: number },
 	Client = ApiEndpointClient<ApiEndpointObject>,

@@ -24,7 +24,7 @@ export const fullToolbar = [
 	[{ font: [] }],
 	...defaultToolbar,
 	[{ 'script': 'super' }, { 'script': 'sub' }],
-	['link', 'video', 'formula', 'Code-block'],
+	['link', 'video', 'formula', 'code-block'],
 ];
 
 export const toolbarPresetMap: Record<ToolbarPresetName, any> = {
