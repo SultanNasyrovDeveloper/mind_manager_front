@@ -1,4 +1,4 @@
-# Mind palace frontend
+# Mind manager frontend
 ## Available Scripts
 
 In the project directory, you can run:
