@@ -1,11 +1,13 @@
 import React, { FC, useCallback } from 'react';
 import { Formik, FormikConfig, FormikProps as FormManagerProps } from 'formik';
+import { isEqual } from 'lodash';
 import { Form as UIForm, FormProps as UIFormProps } from 'ui';
 
 export interface FormProps<DataType = any>
   extends Omit<FormikConfig<DataType>, 'initialValues'>  {
   innerFormProps?: UIFormProps;
   initialValues?: DataType;
+  onHasChanged?: (hasChanged: boolean) => void;
 }
 
 const Form: FC<FormProps> = (
@@ -13,6 +15,7 @@ const Form: FC<FormProps> = (
     initialValues,
     innerFormProps,
     children,
+    onHasChanged,
     ...formikProps
   }
 ) => {
@@ -26,10 +29,16 @@ const Form: FC<FormProps> = (
     <Formik
       initialValues={initialValues || {}}
       {...formikProps}
-      children={(props) => (
-        <UIForm {...innerFormProps}>{ makeFormChildren(props) }</UIForm>
-      )}
-    />
+    >
+      {(props) => {
+        onHasChanged && onHasChanged(!isEqual(props.initialValues, props.values));
+        return (
+          <UIForm {...innerFormProps}>
+            {makeFormChildren(props)}
+          </UIForm>
+        );
+      }}
+    </Formik>
   );
 };
 

@@ -10,7 +10,6 @@ const UserMenu: FC<UserMenuProps> = (
   {...rest}
 ) => {
   const isAuthenticated = useUserStore(getIsCurrentUserAuthenticated);
-  console.log('User is authenticated?: ' + isAuthenticated);
   const logout = useLogout()
   const userMenuItems = useMemo<ItemType[]>(() => [
     {

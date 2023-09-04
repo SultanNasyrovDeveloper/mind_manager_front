@@ -48,14 +48,6 @@ const GeneralInfoCard: FC<GeneralInfoCardProps> = (props) => {
         </Space>
       }
     >
-      <Row>
-        <LearningStatistics
-          size="middle"
-          // @ts-ignore
-          statistics={node?.statistics}
-        />
-      </Row>
-
       <div style={{ width: '100%', marginTop: '16px'}}>
         <PointerText
           editable={{

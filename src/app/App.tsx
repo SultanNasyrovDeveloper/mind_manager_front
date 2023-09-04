@@ -47,9 +47,7 @@ const App: FC<AppProps> = ({...rest}) => {
   
   return (
     <AppLayout
-      sidebarContent={
-        <SidebarMenu items={sidebarItems} />
-      }
+      sidebarContent={<SidebarMenu items={sidebarItems} />}
       headerContent={
         <Row justify="space-between" align="middle">
           <span>Mind Manager</span>

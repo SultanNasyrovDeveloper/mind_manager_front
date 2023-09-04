@@ -27,8 +27,9 @@ const LearningControlPanel: FC<LearningControlPanelProps> = (
 	const handleFormSubmit = useCallback(
 		async (data: Partial<LearningSession>) => {
 			const newSession = await startLearningSession(data);
+			debugger;
 			if (newSession) toggleIsOpen();
-			if (newSession?.current) navigate('/learning/node/current');
+			if (newSession?.current_node) navigate('/learning/node/current');
 	}, [startLearningSession, toggleIsOpen, navigate]);
 	
 	const handleSubmitRepetition = useCallback(async (rating: RepetitionRating) => {
@@ -36,7 +37,7 @@ const LearningControlPanel: FC<LearningControlPanelProps> = (
 		const data = { node: nodeId, rating };
 		const updatedSession = await submitRepetition(data);
 		if (updatedSession) {
-			updatedSession.current
+			updatedSession.current_node
 				? navigate('/learning/node/current')
 				: navigate('/learning/session/finish');
 		}

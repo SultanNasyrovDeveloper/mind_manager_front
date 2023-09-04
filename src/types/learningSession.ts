@@ -16,11 +16,10 @@ export interface LearningSession {
 	is_active: boolean,
 	user: number;
 	targets: number[];
-	current: number;
+	current_node: number;
 	queue_generation_strategy: QueueGenerationStrategy;
 	start_datetime: string;
 	finish_datetime: string;
-	last_repetition_datetime: string;
 }
 
 export interface NodeLearningStatistics {

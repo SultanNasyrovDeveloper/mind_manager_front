@@ -20,9 +20,12 @@ export interface NodeBody {
   type: NodeBodyType;
   meta: CodeBodyMeta;
   data: {
+    // Architectural mistake yeah I know
     content?: string;
     code?: string;
     position_description?: string;
+    phrase?: string;
+    translation?: string;
   };
 }
 

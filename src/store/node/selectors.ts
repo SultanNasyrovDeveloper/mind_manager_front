@@ -48,3 +48,11 @@ export const getFetchNodeMedia = (
 		return undefined;
 	};
 }
+
+export const getPhrase = (
+	state: EndpointObjectState<NodeBody>
+): string => _.get(state, 'detail.data.phrase', '<p><br></p>');
+
+export const getTranslation = (
+	state: EndpointObjectState<NodeBody>
+): string => _.get(state, 'detail.data.translation', '<p><br></p>');
